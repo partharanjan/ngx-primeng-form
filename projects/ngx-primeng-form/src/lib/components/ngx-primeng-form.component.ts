@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, ValidatorFn } from '@angular/forms';
+import { FormGroup, ValidatorFn, AbstractControl } from '@angular/forms';
 import { NgxPrimengForm, NgxPrimengFormProperty } from '../interfaces/ngx-primeng-form';
 import { SelectItem } from 'primeng/api/selectitem';
 import { NgxPrimengFormService } from '../services/ngx-primeng-form.service';
@@ -43,6 +43,18 @@ export class NgxPrimengFormComponent implements OnInit {
 
   getProperty<T extends NgxPrimengFormProperty>(controlName: string): T {
     return this.service.getProperty(controlName, this.items);
+  }
+
+  //is field required or not
+  isRequired(controlName:string): boolean {
+    const control = this.form.controls[controlName];
+    if (control && control.validator) {
+      const validator = control.validator({} as AbstractControl);
+      if (validator && validator.required) {
+        return true;
+      }
+    }
+    return false;
   }
 
 }

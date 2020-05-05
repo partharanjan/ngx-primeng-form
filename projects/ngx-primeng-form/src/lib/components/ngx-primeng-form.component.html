@@ -6,7 +6,7 @@
 
             <div class="{{obj.layoutStyleClass}}">
 
-                <label>{{obj.label}}</label>
+                <label>{{obj.label}} <span class="text-danger" *ngIf="isRequired(obj.controlName)">*</span></label>
 
                 <ng-container [ngSwitch]="obj.type">
 
@@ -72,9 +72,9 @@
                     <ng-container *ngSwitchCase="'radio'">
                         <div class="{{obj.property.containerCSS}}">
                             <ng-container *ngFor="let radioObj of obj.property.items;let radioIndex=index">
-                                <p-radioButton [styleClass]="obj.controlStyleClass" labelStyleClass="mr-2" [name]="obj.id"
-                                    id="{{obj.id}}_{{radioIndex}}" [value]="radioObj.value" [label]="radioObj.label"
-                                    [formControlName]="obj.controlName"></p-radioButton>
+                                <p-radioButton [styleClass]="obj.controlStyleClass" labelStyleClass="mr-2"
+                                    [name]="obj.id" id="{{obj.id}}_{{radioIndex}}" [value]="radioObj.value"
+                                    [label]="radioObj.label" [formControlName]="obj.controlName"></p-radioButton>
                             </ng-container>
                         </div>
                     </ng-container>

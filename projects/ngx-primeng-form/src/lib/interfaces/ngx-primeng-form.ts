@@ -36,7 +36,6 @@ export interface NgxPrimengForm {
 }
 
 export interface NgxPrimengFormValidation {
-    displayName: string;
     required: boolean;
     email: boolean;
     minLength: number;
