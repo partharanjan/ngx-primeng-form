@@ -119,6 +119,47 @@
           }
         }
       }
-    }},
+    },
+    "ngx-primeng-form": {
+      "projectType": "library",
+      "root": "projects/ngx-primeng-form",
+      "sourceRoot": "projects/ngx-primeng-form/src",
+      "prefix": "ngx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-primeng-form/tsconfig.lib.json",
+            "project": "projects/ngx-primeng-form/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-primeng-form/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-primeng-form/src/test.ts",
+            "tsConfig": "projects/ngx-primeng-form/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-primeng-form/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-primeng-form/tsconfig.lib.json",
+              "projects/ngx-primeng-form/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
   "defaultProject": "form-generator-primeng"
 }

@@ -14,10 +14,17 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ngx-primeng-form": [
+        "dist/ngx-primeng-form/ngx-primeng-form",
+        "dist/ngx-primeng-form"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
+    "strictInjectionParameters": true,
+    "enableIvy": false
   }
 }
