@@ -1,0 +1,11 @@
+<!--For generic error-->
+<ng-container *ngIf="error.generic">
+    <div class="invalid-feedback d-block">{{error.message}}</div>
+</ng-container>
+<!--For required error-->
+<ng-container *ngIf="!error.generic">
+    <!--check for valid control-->
+    <ng-container *ngIf="hasRequiredError">
+        <div class="invalid-feedback d-block">{{error.message}}</div>
+    </ng-container>
+</ng-container>

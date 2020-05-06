@@ -1,0 +1,8 @@
+<div class="form-group">
+    <!--Label-->
+    <label>{{label}} <span class="text-danger" *ngIf="isRequired">*</span></label>
+    <!--Content-->
+    <ng-content></ng-content>
+    <!--Validation-->
+    <ngx-inline-form-validation [form]="form" [control]="control" [displayName]="label"></ngx-inline-form-validation>
+</div>

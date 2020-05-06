@@ -6,88 +6,91 @@
 
             <div class="{{obj.layoutStyleClass}}">
 
-                <label>{{obj.label}} <span class="text-danger" *ngIf="isRequired(obj.controlName)">*</span></label>
+                <ngx-form-control-layout [label]="obj.label" [form]="form" [control]="obj.controlName">
 
-                <ng-container [ngSwitch]="obj.type">
+                    <ng-container [ngSwitch]="obj.type">
 
-                    <!--Textbox-->
-                    <ng-container *ngSwitchCase="'text'">
-                        <input class="{{obj.controlStyleClass}}" [formControlName]="obj.controlName" [name]="obj.id"
-                            [id]="obj.id" [placeholder]="obj.placeholder" autocomplete="off"
-                            (onChange)="obj.property.onChange($event)" (onBlur)="obj.property.onBlur($event)"
-                            (onFocus)="obj.property.onFocus($event)" />
+                        <!--Textbox-->
+                        <ng-container *ngSwitchCase="'text'">
+                            <input class="{{obj.controlStyleClass}}" [formControlName]="obj.controlName" [name]="obj.id"
+                                [id]="obj.id" [placeholder]="obj.placeholder" autocomplete="off"
+                                (onChange)="obj.property.onChange($event)" (onBlur)="obj.property.onBlur($event)"
+                                (onFocus)="obj.property.onFocus($event)" />
+                        </ng-container>
+
+                        <!--Dropdown-->
+                        <ng-container *ngSwitchCase="'select'">
+                            <p-dropdown [styleClass]="obj.controlStyleClass" [formControlName]="obj.controlName"
+                                [options]="obj.property.options" [placeholder]="obj.placeholder"
+                                [filter]="obj.property.filter" [autoDisplayFirst]="false" [showClear]="true"
+                                (onChange)="obj.property.onChange($event)" [name]="obj.id" [inputId]="obj.id"
+                                (onBlur)="obj.property.onBlur($event)" (onFocus)="obj.property.onFocus($event)">
+                            </p-dropdown>
+                        </ng-container>
+
+                        <!--multiselect-->
+                        <ng-container *ngSwitchCase="'multiselect'">
+                            <p-multiSelect [styleClass]="obj.controlStyleClass" [formControlName]="obj.controlName"
+                                [options]="obj.property.options" [filter]="obj.property.filter"
+                                (onChange)="obj.property.onChange($event)" [name]="obj.id" [inputId]="obj.id"
+                                (onBlur)="obj.property.onBlur($event)" (onFocus)="obj.property.onFocus($event)">
+                            </p-multiSelect>
+                        </ng-container>
+
+                        <!--Date Picker-->
+                        <ng-container *ngSwitchCase="'date'">
+                            <p-calendar [showIcon]="true" [formControlName]="obj.controlName"
+                                [styleClass]="obj.controlStyleClass" [name]="obj.id" [inputId]="obj.id"
+                                [defaultDate]="obj.property.defaultDate" [minDate]="obj.property.minDate"
+                                [maxDate]="obj.property.maxDate" [dateFormat]="obj.property.format"
+                                (onSelect)="obj.property.onChange($event)" (onInput)="obj.property.onChange($event)"
+                                (onBlur)="obj.property.onBlur($event)" (onFocus)="obj.property.onFocus($event)">
+                            </p-calendar>
+                        </ng-container>
+
+                        <!--autocomplete-->
+                        <ng-container *ngSwitchCase="'autocomplete'">
+                            <p-autoComplete [styleClass]="obj.controlStyleClass" [formControlName]="obj.controlName"
+                                [name]="obj.id" [inputId]="obj.id" [minLength]="obj.property.minLength"
+                                [forceSelection]="obj.property.forceSelection" [suggestions]="obj.property.suggestions"
+                                (completeMethod)="obj.property.onSearch($event)"
+                                (onSelect)="obj.property.onChange($event)" (onBlur)="obj.property.onBlur($event)"
+                                (onFocus)="obj.property.onFocus($event)">
+                            </p-autoComplete>
+                        </ng-container>
+
+                        <!--Checkbox-->
+                        <ng-container *ngSwitchCase="'checkbox'">
+                            <div class="{{obj.property.containerCSS}}">
+                                <p-checkbox [styleClass]="obj.controlStyleClass"
+                                    [formControl]="form.controls[obj.controlName]" [label]="obj.property.label"
+                                    [binary]="true" [name]="obj.id" [inputId]="obj.id"
+                                    (onChange)="obj.property.onChange($event)"></p-checkbox>
+                            </div>
+                        </ng-container>
+
+                        <!--Radio-->
+                        <ng-container *ngSwitchCase="'radio'">
+                            <div class="{{obj.property.containerCSS}}">
+                                <ng-container *ngFor="let radioObj of obj.property.items;let radioIndex=index">
+                                    <p-radioButton [styleClass]="obj.controlStyleClass" labelStyleClass="mr-2"
+                                        [name]="obj.id" id="{{obj.id}}_{{radioIndex}}" [value]="radioObj.value"
+                                        [label]="radioObj.label" [formControlName]="obj.controlName"></p-radioButton>
+                                </ng-container>
+                            </div>
+                        </ng-container>
+
+                        <!--Textarea-->
+                        <ng-container *ngSwitchCase="'textarea'">
+                            <textarea class="{{obj.controlStyleClass}}" [formControlName]="obj.controlName"
+                                [name]="obj.id" [id]="obj.id" [placeholder]="obj.placeholder" autocomplete="off"
+                                (onChange)="obj.property.onChange($event)" (onBlur)="obj.property.onBlur($event)"
+                                (onFocus)="obj.property.onFocus($event)"></textarea>
+                        </ng-container>
+
                     </ng-container>
 
-                    <!--Dropdown-->
-                    <ng-container *ngSwitchCase="'select'">
-                        <p-dropdown [styleClass]="obj.controlStyleClass" [formControlName]="obj.controlName"
-                            [options]="obj.property.options" [placeholder]="obj.placeholder"
-                            [filter]="obj.property.filter" [autoDisplayFirst]="false" [showClear]="true"
-                            (onChange)="obj.property.onChange($event)" [name]="obj.id" [inputId]="obj.id"
-                            (onBlur)="obj.property.onBlur($event)" (onFocus)="obj.property.onFocus($event)">
-                        </p-dropdown>
-                    </ng-container>
-
-                    <!--multiselect-->
-                    <ng-container *ngSwitchCase="'multiselect'">
-                        <p-multiSelect [styleClass]="obj.controlStyleClass" [formControlName]="obj.controlName"
-                            [options]="obj.property.options" [filter]="obj.property.filter"
-                            (onChange)="obj.property.onChange($event)" [name]="obj.id" [inputId]="obj.id"
-                            (onBlur)="obj.property.onBlur($event)" (onFocus)="obj.property.onFocus($event)">
-                        </p-multiSelect>
-                    </ng-container>
-
-                    <!--Date Picker-->
-                    <ng-container *ngSwitchCase="'date'">
-                        <p-calendar [showIcon]="true" [formControlName]="obj.controlName"
-                            [styleClass]="obj.controlStyleClass" [name]="obj.id" [inputId]="obj.id"
-                            [defaultDate]="obj.property.defaultDate" [minDate]="obj.property.minDate"
-                            [maxDate]="obj.property.maxDate" [dateFormat]="obj.property.format"
-                            (onSelect)="obj.property.onChange($event)" (onInput)="obj.property.onChange($event)"
-                            (onBlur)="obj.property.onBlur($event)" (onFocus)="obj.property.onFocus($event)">
-                        </p-calendar>
-                    </ng-container>
-
-                    <!--autocomplete-->
-                    <ng-container *ngSwitchCase="'autocomplete'">
-                        <p-autoComplete [styleClass]="obj.controlStyleClass" [formControlName]="obj.controlName"
-                            [name]="obj.id" [inputId]="obj.id" [minLength]="obj.property.minLength"
-                            [forceSelection]="obj.property.forceSelection" [suggestions]="obj.property.suggestions"
-                            (completeMethod)="obj.property.onSearch($event)" (onSelect)="obj.property.onChange($event)"
-                            (onBlur)="obj.property.onBlur($event)" (onFocus)="obj.property.onFocus($event)">
-                        </p-autoComplete>
-                    </ng-container>
-
-                    <!--Checkbox-->
-                    <ng-container *ngSwitchCase="'checkbox'">
-                        <div class="{{obj.property.containerCSS}}">
-                            <p-checkbox [styleClass]="obj.controlStyleClass"
-                                [formControl]="form.controls[obj.controlName]" [label]="obj.property.label"
-                                [binary]="true" [name]="obj.id" [inputId]="obj.id"
-                                (onChange)="obj.property.onChange($event)"></p-checkbox>
-                        </div>
-                    </ng-container>
-
-                    <!--Radio-->
-                    <ng-container *ngSwitchCase="'radio'">
-                        <div class="{{obj.property.containerCSS}}">
-                            <ng-container *ngFor="let radioObj of obj.property.items;let radioIndex=index">
-                                <p-radioButton [styleClass]="obj.controlStyleClass" labelStyleClass="mr-2"
-                                    [name]="obj.id" id="{{obj.id}}_{{radioIndex}}" [value]="radioObj.value"
-                                    [label]="radioObj.label" [formControlName]="obj.controlName"></p-radioButton>
-                            </ng-container>
-                        </div>
-                    </ng-container>
-
-                    <!--Textarea-->
-                    <ng-container *ngSwitchCase="'textarea'">
-                        <textarea class="{{obj.controlStyleClass}}" [formControlName]="obj.controlName" [name]="obj.id"
-                            [id]="obj.id" [placeholder]="obj.placeholder" autocomplete="off"
-                            (onChange)="obj.property.onChange($event)" (onBlur)="obj.property.onBlur($event)"
-                            (onFocus)="obj.property.onFocus($event)"></textarea>
-                    </ng-container>
-
-                </ng-container>
+                </ngx-form-control-layout>
 
             </div>
 

@@ -45,16 +45,4 @@ export class NgxPrimengFormComponent implements OnInit {
     return this.service.getProperty(controlName, this.items);
   }
 
-  //is field required or not
-  isRequired(controlName:string): boolean {
-    const control = this.form.controls[controlName];
-    if (control && control.validator) {
-      const validator = control.validator({} as AbstractControl);
-      if (validator && validator.required) {
-        return true;
-      }
-    }
-    return false;
-  }
-
 }
