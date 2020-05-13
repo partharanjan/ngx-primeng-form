@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, ValidatorFn, AbstractControl } from '@angular/forms';
+import { FormGroup, ValidatorFn } from '@angular/forms';
 import { NgxPrimengForm, NgxPrimengFormProperty } from '../interfaces/ngx-primeng-form';
-import { SelectItem } from 'primeng/api/selectitem';
+import { SelectItem } from 'primeng/api';
 import { NgxPrimengFormService } from '../services/ngx-primeng-form.service';
 
 @Component({

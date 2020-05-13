@@ -1,4 +1,4 @@
-import { SelectItem } from 'primeng/api/selectitem';
+import { SelectItem } from 'primeng/api';
 
 export enum NgxPrimengFormType {
     text = 'text',
@@ -53,6 +53,14 @@ export class NgxPrimengFormProperty {
     onBlur($event: any) { }
     // on focus in
     onFocus($event: any) { }
+    // append to
+    appendTo: string = null;
+}
+
+// for text box
+export class NgxPrimengFormTextProperty extends NgxPrimengFormProperty {
+    // text type defualt is text
+    type: string = 'text';
 }
 
 // select property
@@ -80,11 +88,11 @@ export class NgxPrimengFormAutoCompleteProperty extends NgxPrimengFormProperty {
 // checkbox property
 export class NgxPrimengFormCheckboxProperty extends NgxPrimengFormProperty {
     label: string;
-    containerCssClass: string = 'mt-1';
+    containerStyleClass: string = 'mt-1';
 }
 
 //radio property
 export class NgxPrimengFormRadioProperty extends NgxPrimengFormProperty {
     items: SelectItem[] = [];
-    containerCssClass: string;
+    containerStyleClass: string;
 }

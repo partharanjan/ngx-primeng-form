@@ -36,5 +36,57 @@
             "max": 0,
             "regex": null
         }
+    },
+    {
+        "controlName": "gender",
+        "label": "Gender",
+        "type": "select",
+        "controlStyleClass": "form-control",
+        "layoutStyleClass": "col-md-6 col-xs-12",
+        "validation": {
+            "required": true,
+            "email": null,
+            "minLength": 0,
+            "maxLength": 500,
+            "min": 0,
+            "max": 0,
+            "regex": null
+        },
+        "property": {
+            "options": [
+                {
+                    "label": "Male",
+                    "value": "M"
+                },
+                {
+                    "label": "FeMale",
+                    "value": "F"
+                },
+                {
+                    "label": "Other",
+                    "value": "O"
+                }
+            ],
+            "filter": false
+        }
+    },
+    {
+        "controlName": "dob",
+        "label": "DOB",
+        "type": "date",
+        "controlStyleClass": "form-control",
+        "layoutStyleClass": "col-md-6 col-xs-12",
+        "validation": {
+            "required": true,
+            "email": null,
+            "minLength": 0,
+            "maxLength": 500,
+            "min": 0,
+            "max": 0,
+            "regex": null
+        },
+        "property": {
+            "format": "mm-dd-yy"
+        }
     }
 ]
