@@ -8,7 +8,9 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { RadioButtonModule } from 'primeng/radiobutton';
 
-import { NgxPrimengFormComponent } from './components/ngx-primeng-form.component';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+
+import { NgxPrimengFormComponent } from './components/form/ngx-primeng-form.component';
 import { FormControlLayoutComponent } from './components/form-control-layout/form-control-layout.component';
 import { InlineFormValidationComponent } from './components/inline-form-validation/inline-form-validation.component';
 
@@ -29,7 +31,8 @@ const components = [
     CalendarModule,
     CheckboxModule,
     RadioButtonModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    NgxMaterialTimepickerModule
   ],
   exports: [...components]
 })

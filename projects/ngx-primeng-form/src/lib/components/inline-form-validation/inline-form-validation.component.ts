@@ -68,6 +68,12 @@ export class InlineFormValidationComponent implements OnInit, OnDestroy {
         case 'maxlength': {
           return `Maximum length is ${control.errors.maxlength.requiredLength}`;
         }
+        case 'min': {
+          return `Minimum ${this.displayName} is ${control.errors.min.min}`;
+        }
+        case 'max': {
+          return `Maximum ${this.displayName} is ${control.errors.max.max}`;
+        }
         case 'pattern': {
           return `Invalid ${this.displayName} format`;
         }

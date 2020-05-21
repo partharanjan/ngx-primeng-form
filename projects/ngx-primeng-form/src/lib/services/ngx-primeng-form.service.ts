@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { NgxPrimengFormType, NgxPrimengForm, NgxPrimengFormProperty, NgxPrimengFormSelectProperty, NgxPrimengFormRadioProperty, NgxPrimengFormDateProperty, NgxPrimengFormCheckboxProperty, NgxPrimengFormAutoCompleteProperty, NgxPrimengFormValidation, NgxPrimengFormTextProperty } from '../interfaces/ngx-primeng-form';
-import { FormGroup, FormControl, Validator, Validators, ValidatorFn } from '@angular/forms';
+import { NgxPrimengFormType, INgxPrimengForm, NgxPrimengFormProperty, NgxPrimengFormSelectProperty, NgxPrimengFormRadioProperty, NgxPrimengFormDateProperty, NgxPrimengFormCheckboxProperty, NgxPrimengFormAutoCompleteProperty, INgxPrimengFormValidation, NgxPrimengFormTextProperty, NgxPrimengFormTimeProperty } from '../interfaces/ngx-primeng-form';
+import { FormGroup, FormControl, Validator, Validators, ValidatorFn, FormBuilder } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
 
 @Injectable({
@@ -11,7 +11,7 @@ export class NgxPrimengFormService {
   constructor() { }
 
   // this will create internally control
-  private create(controlName: string, label: string, id: string, type: NgxPrimengFormType, value: any, placeholder: string, controlCssClass: string, layoutCssClass: string, validation: NgxPrimengFormValidation, defProperty: any): NgxPrimengForm {
+  private create(controlName: string, label: string, id: string, type: NgxPrimengFormType, value: any, placeholder: string, controlCssClass: string, layoutCssClass: string, validation: INgxPrimengFormValidation, defProperty: any): INgxPrimengForm {
     return {
       controlName,
       label,
@@ -36,6 +36,7 @@ export class NgxPrimengFormService {
       case NgxPrimengFormType.select: { return this.getSelectProperty(property); }
       case NgxPrimengFormType.text: { return this.getTextProperty(property); }
       case NgxPrimengFormType.textarea: { return this.getTextProperty(property); }
+      case NgxPrimengFormType.time: { return this.getTimeProperty(property); }
       default: { return new NgxPrimengFormProperty() }
     }
   }
@@ -115,7 +116,33 @@ export class NgxPrimengFormService {
       if (this.hasPropertyValue(property, 'appendTo')) {
         model.appendTo = property['appendTo'];
       }
+      // for append
+      if (this.hasPropertyValue(property, 'type')) {
+        model.type = property['type'];
+      }
       // in future add more attribute
+    }
+    return model;
+  }
+
+  // get textbox property
+  private getTimeProperty(property: any): NgxPrimengFormTimeProperty {
+    // create model
+    const model = new NgxPrimengFormTimeProperty();
+    // NULL check
+    if (property) {
+      // for gap
+      if (this.hasPropertyValue(property, 'gap')) {
+        model.gap = property['gap'];
+      }
+      // for format
+      if (this.hasPropertyValue(property, 'format')) {
+        model.format = property['format'];
+      }
+      // appendToInput
+      if (this.hasPropertyValue(property, 'appendToInput')) {
+        model.appendToInput = property['appendToInput'];
+      }
     }
     return model;
   }
@@ -170,7 +197,7 @@ export class NgxPrimengFormService {
   }
 
   // get property by control name
-  getProperty<T extends NgxPrimengFormProperty>(controlName: string, forms: NgxPrimengForm[]): T {
+  getProperty<T extends NgxPrimengFormProperty>(controlName: string, forms: INgxPrimengForm[]): T {
     if (forms && forms.length > 0) {
       const item = forms.find(m => m.controlName.toLowerCase() == controlName.toLowerCase());
       if (item != null) {
@@ -181,8 +208,8 @@ export class NgxPrimengFormService {
   }
 
   // json object to form object
-  jsonToForm(jsonForms: NgxPrimengForm[]): NgxPrimengForm[] {
-    const results: NgxPrimengForm[] = []
+  jsonToForm(jsonForms: INgxPrimengForm[]): INgxPrimengForm[] {
+    const results: INgxPrimengForm[] = []
     if (jsonForms && jsonForms.length > 0) {
       jsonForms.forEach(form => {
         // prepare the form
@@ -204,7 +231,7 @@ export class NgxPrimengFormService {
   }
 
   // prepare control
-  prepareControl(formGroup: FormGroup, forms: NgxPrimengForm[]) {
+  prepareControl(formGroup: FormGroup, forms: INgxPrimengForm[]) {
     // clear the form gropup
     Object.keys(formGroup.controls).forEach(controlName => {
       formGroup.removeControl(controlName);
@@ -219,8 +246,21 @@ export class NgxPrimengFormService {
     }
   }
 
+  createControl(formBuilder: FormBuilder, forms: INgxPrimengForm[]): FormGroup {
+    // clear the form gropup
+    const formGroup = formBuilder.group({});
+    // set the form group value
+    if (forms && forms.length > 0) {
+      forms.forEach(form => {
+        const validations = this.getValidations(form.validation);
+        formGroup.addControl(form.controlName, new FormControl(form.value, validations));
+      });
+    }
+    return formGroup;
+  }
+
   // get validations
-  getValidations(validation: NgxPrimengFormValidation): ValidatorFn[] {
+  getValidations(validation: INgxPrimengFormValidation): ValidatorFn[] {
     const results: ValidatorFn[] = [];
     if (validation) {
       // required
@@ -256,7 +296,7 @@ export class NgxPrimengFormService {
   }
 
   // set select items
-  setSelectItems(forms: NgxPrimengForm[], controlName: string, items: SelectItem[]) {
+  setSelectItems(forms: INgxPrimengForm[], controlName: string, items: SelectItem[]) {
     const property = this.getProperty(controlName, forms) as NgxPrimengFormSelectProperty;
     if (property) {
       property.options = items;

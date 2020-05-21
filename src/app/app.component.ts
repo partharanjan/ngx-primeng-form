@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { NgxPrimengForm, NgxPrimengFormService } from 'projects/ngx-primeng-form/src/public-api';
+import { INgxPrimengForm, NgxPrimengFormService } from 'projects/ngx-primeng-form/src/public-api';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,7 @@ import { NgxPrimengForm, NgxPrimengFormService } from 'projects/ngx-primeng-form
 export class AppComponent implements OnInit {
 
   form: FormGroup;
-  formItems: NgxPrimengForm[] = [];
+  formItems: INgxPrimengForm[] = [];
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
   }
 
   private loadForms() {
-    this.http.get<NgxPrimengForm[]>(`./assets/form.json`).subscribe(forms => {
+    this.http.get<INgxPrimengForm[]>(`./assets/form.json`).subscribe(forms => {
       this.service.prepareControl(this.form, forms);
       this.formItems = this.service.jsonToForm(forms);
     });

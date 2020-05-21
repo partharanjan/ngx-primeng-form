@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, ValidatorFn } from '@angular/forms';
-import { NgxPrimengForm, NgxPrimengFormProperty } from '../interfaces/ngx-primeng-form';
+import { INgxPrimengForm, NgxPrimengFormProperty } from '../../interfaces/ngx-primeng-form';
 import { SelectItem } from 'primeng/api';
-import { NgxPrimengFormService } from '../services/ngx-primeng-form.service';
+import { NgxPrimengFormService } from '../../services/ngx-primeng-form.service';
 
 @Component({
   selector: 'ngx-primeng-form',
@@ -14,17 +14,17 @@ export class NgxPrimengFormComponent implements OnInit {
   // instance of the froms
   @Input() form: FormGroup;
   // items of control
-  @Input() items: NgxPrimengForm[] = [];
+  @Input() items: INgxPrimengForm[] = [];
 
   constructor(private service: NgxPrimengFormService) { }
 
   ngOnInit(): void { }
 
-  trackByControlName(index: number, el: NgxPrimengForm): string {
+  trackByControlName(index: number, el: INgxPrimengForm): string {
     return el.controlName;
   }
 
-  getControl(controlName: string): NgxPrimengForm {
+  getControl(controlName: string): INgxPrimengForm {
     return this.items.find(m => m.controlName.toLowerCase() == controlName.toLowerCase());
   }
 

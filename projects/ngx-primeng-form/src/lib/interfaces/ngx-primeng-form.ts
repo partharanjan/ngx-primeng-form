@@ -5,6 +5,7 @@ export enum NgxPrimengFormType {
     select = 'select',
     multiselect = 'multiselect',
     date = 'date',
+    time = 'time',
     autocomplete = 'autocomplete',
     checkbox = 'checkbox',
     radio = "radio",
@@ -12,13 +13,13 @@ export enum NgxPrimengFormType {
 }
 
 // primeng form model
-export interface NgxPrimengForm {
+export interface INgxPrimengForm {
     // form label
     label: string;
     // control name
     controlName: string;
     // control Id
-    id: string;
+    id?: string;
     // control type
     type: NgxPrimengFormType;
     // control css
@@ -26,16 +27,16 @@ export interface NgxPrimengForm {
     // layout css
     layoutStyleClass: string;
     // placeholder
-    placeholder: string;
+    placeholder?: string;
     // default value
-    value: any;
+    value?: any;
     // validations
-    validation: NgxPrimengFormValidation;
+    validation: INgxPrimengFormValidation;
     // property
-    property: NgxPrimengFormProperty;
+    property?: NgxPrimengFormProperty;
 }
 
-export interface NgxPrimengFormValidation {
+export interface INgxPrimengFormValidation {
     required: boolean;
     email: boolean;
     minLength: number;
@@ -74,7 +75,14 @@ export class NgxPrimengFormDateProperty extends NgxPrimengFormProperty {
     defaultDate: Date = null;
     minDate: Date = null;
     maxDate: Date = null;
-    format: string = 'mm-dd-yy';
+    format: string = 'dd-mm-yy';
+    type: string = 'date';
+}
+
+export class NgxPrimengFormTimeProperty extends NgxPrimengFormProperty {
+    gap: number = 5;
+    format: string = '12';
+    appendToInput: boolean = false;
 }
 
 // autocomplete property

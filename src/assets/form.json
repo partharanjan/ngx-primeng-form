@@ -88,5 +88,44 @@
         "property": {
             "format": "mm-dd-yy"
         }
+    },
+    {
+        "controlName": "votingTime",
+        "label": "Voting Time",
+        "type": "time",
+        "controlStyleClass": "form-control",
+        "layoutStyleClass": "col-md-6 col-xs-12",
+        "validation": {
+            "required": true
+        }
+    },
+    {
+        "controlName": "visitTime",
+        "label": "Visit Time",
+        "type": "time",
+        "controlStyleClass": "form-control",
+        "layoutStyleClass": "col-md-6 col-xs-12",
+        "value": "10:00 AM",
+        "validation": {
+            "required": true
+        },
+        "property": {
+            "gap": 15
+        }
+    },
+    {
+        "controlName": "age",
+        "label": "Age",
+        "type": "text",
+        "controlStyleClass": "form-control",
+        "layoutStyleClass": "col-md-6 col-xs-12",
+        "value": "10:00 AM",
+        "validation": {
+            "min": 18,
+            "max": 30
+        },
+        "property": {
+            "type": "number"
+        }
     }
 ]

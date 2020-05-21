@@ -1,3 +1,7 @@
 <ngx-primeng-form [form]="form" [items]="formItems"></ngx-primeng-form>
 
+<div>
+    {{form.value | json}}
+</div>
+
 <button type="button" (click)="submit()">Submit</button>
