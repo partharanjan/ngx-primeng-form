@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgxPrimengFormType, INgxPrimengForm, NgxPrimengFormProperty, NgxPrimengFormSelectProperty, NgxPrimengFormRadioProperty, NgxPrimengFormDateProperty, NgxPrimengFormCheckboxProperty, NgxPrimengFormAutoCompleteProperty, INgxPrimengFormValidation, NgxPrimengFormTextProperty, NgxPrimengFormTimeProperty } from '../interfaces/ngx-primeng-form';
-import { FormGroup, FormControl, Validator, Validators, ValidatorFn, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidatorFn, FormBuilder } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
 
 @Injectable({
@@ -41,16 +41,42 @@ export class NgxPrimengFormService {
     }
   }
 
+  // set property and value if any
+  private setProperty(model: any, key: string, property: any, checkValue: boolean = true) {
+    if (checkValue) {
+      // for value
+      if (this.hasPropertyValue(property, key)) {
+        model[key] = property[key];
+      }
+    }
+    else {
+      // only property
+      if (this.hasProperty(property, key)) {
+        model[key] = property[key];
+      }
+    }
+  }
+
+  // this is for shared property
+  private setSharedProperty<T extends NgxPrimengFormProperty>(model: T, property: any) {
+    // append to
+    this.setProperty(model, 'appendTo', property);
+    // addOptionLabel
+    this.setProperty(model, 'addOptionLabel', property);
+    // helpText
+    this.setProperty(model, 'helpText', property);
+  }
+
   // get textbox property
   private getTextProperty(property: any): NgxPrimengFormTextProperty {
     // create model
     const model = new NgxPrimengFormTextProperty();
     // NULL check
     if (property) {
-      // for date format
-      if (this.hasPropertyValue(property, 'type')) {
-        model.type = property['type'];
-      }
+      // shared property
+      this.setSharedProperty(model, property);
+      // for type
+      this.setProperty(model, 'type', property);
     }
     return model;
   }
@@ -61,21 +87,12 @@ export class NgxPrimengFormService {
     const model = new NgxPrimengFormSelectProperty();
     // NULL check
     if (property) {
-      // for Option
-      if (this.hasPropertyValue(property, 'options')) {
-        const options = property['options'];
-        if (options && Array.isArray(options)) {
-          model.options = options;
-        }
-      }
+      // shared property
+      this.setSharedProperty(model, property);
+      // for options
+      this.setProperty(model, 'options', property);
       // for filter
-      if (this.hasProperty(property, 'filter')) {
-        model.filter = property['filter'];
-      }
-      // for append
-      if (this.hasPropertyValue(property, 'appendTo')) {
-        model.appendTo = property['appendTo'];
-      }
+      this.setProperty(model, 'filter', property, false);
     }
     return model;
   }
@@ -86,18 +103,12 @@ export class NgxPrimengFormService {
     const model = new NgxPrimengFormAutoCompleteProperty();
     // NULL check
     if (property) {
-      // for Option
-      if (this.hasPropertyValue(property, 'minLength')) {
-        model.minLength = parseInt(property['minLength'], 10);
-      }
-      // for forceSelection
-      if (this.hasProperty(property, 'forceSelection')) {
-        model.forceSelection = property['forceSelection'];
-      }
-      // for append
-      if (this.hasPropertyValue(property, 'appendTo')) {
-        model.appendTo = property['appendTo'];
-      }
+      // shared property
+      this.setSharedProperty(model, property);
+      // for options
+      this.setProperty(model, 'minLength', property);
+      // for options
+      this.setProperty(model, 'forceSelection', property, false);
     }
     return model;
   }
@@ -108,19 +119,12 @@ export class NgxPrimengFormService {
     const model = new NgxPrimengFormDateProperty();
     // NULL check
     if (property) {
-      // for date format
-      if (this.hasPropertyValue(property, 'format')) {
-        model.format = property['format'];
-      }
-      // for append
-      if (this.hasPropertyValue(property, 'appendTo')) {
-        model.appendTo = property['appendTo'];
-      }
-      // for append
-      if (this.hasPropertyValue(property, 'type')) {
-        model.type = property['type'];
-      }
-      // in future add more attribute
+      // shared property
+      this.setSharedProperty(model, property);
+      // for format
+      this.setProperty(model, 'format', property);
+      // for type
+      this.setProperty(model, 'type', property);
     }
     return model;
   }
@@ -131,18 +135,14 @@ export class NgxPrimengFormService {
     const model = new NgxPrimengFormTimeProperty();
     // NULL check
     if (property) {
-      // for gap
-      if (this.hasPropertyValue(property, 'gap')) {
-        model.gap = property['gap'];
-      }
+      // shared property
+      this.setSharedProperty(model, property);
       // for format
-      if (this.hasPropertyValue(property, 'format')) {
-        model.format = property['format'];
-      }
-      // appendToInput
-      if (this.hasPropertyValue(property, 'appendToInput')) {
-        model.appendToInput = property['appendToInput'];
-      }
+      this.setProperty(model, 'gap', property);
+      // for format
+      this.setProperty(model, 'format', property);
+      // for format
+      this.setProperty(model, 'appendToInput', property, false);
     }
     return model;
   }
@@ -153,14 +153,12 @@ export class NgxPrimengFormService {
     const model = new NgxPrimengFormCheckboxProperty();
     // NULL check
     if (property) {
-      // for date format
-      if (this.hasPropertyValue(property, 'label')) {
-        model.label = property['label'];
-      }
-      // containerStyleClass
-      if (this.hasPropertyValue(property, 'containerStyleClass')) {
-        model.containerStyleClass = property['containerStyleClass'];
-      }
+      // shared property
+      this.setSharedProperty(model, property);
+      // for format
+      this.setProperty(model, 'label', property);
+      // for format
+      this.setProperty(model, 'containerStyleClass', property);
     }
     return model;
   }
@@ -171,17 +169,12 @@ export class NgxPrimengFormService {
     const model = new NgxPrimengFormRadioProperty();
     // NULL check
     if (property) {
-      // for date format
-      if (this.hasPropertyValue(property, 'items')) {
-        const items = property['items'];
-        if (items && Array.isArray(items)) {
-          model.items = items;
-        }
-      }
-      // containerStyleClass
-      if (this.hasPropertyValue(property, 'containerStyleClass')) {
-        model.containerStyleClass = property['containerStyleClass'];
-      }
+      // shared property
+      this.setSharedProperty(model, property);
+      // for format
+      this.setProperty(model, 'items', property);
+      // for format
+      this.setProperty(model, 'containerStyleClass', property);
     }
     return model;
   }

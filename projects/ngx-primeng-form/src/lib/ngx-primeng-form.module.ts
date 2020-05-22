@@ -7,6 +7,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { TooltipModule } from 'primeng/tooltip';
 
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
@@ -32,7 +33,8 @@ const components = [
     CheckboxModule,
     RadioButtonModule,
     AutoCompleteModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    TooltipModule
   ],
   exports: [...components]
 })

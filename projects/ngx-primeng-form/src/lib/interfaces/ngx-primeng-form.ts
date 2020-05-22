@@ -54,8 +54,14 @@ export class NgxPrimengFormProperty {
     onBlur($event: any) { }
     // on focus in
     onFocus($event: any) { }
+    // on option clicked
+    onAddOption() { };
     // append to
     appendTo: string = null;
+    // add option label
+    addOptionLabel: string = null;
+    // help text
+    helpText: string = null;
 }
 
 // for text box

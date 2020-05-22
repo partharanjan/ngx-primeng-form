@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, ValidatorFn } from '@angular/forms';
 import { INgxPrimengForm, NgxPrimengFormProperty } from '../../interfaces/ngx-primeng-form';
 import { SelectItem } from 'primeng/api';

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
 
 @Component({
@@ -15,9 +15,20 @@ export class FormControlLayoutComponent implements OnInit {
   // control name
   @Input() control: string;
 
+  // add option
+  @Input() addOptionLabel: string = null;
+  // on add option
+  @Output() onAddOption = new EventEmitter<void>();
+  // hints text
+  @Input() helpText: string = null;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  handleOnAdd() {
+    this.onAddOption.emit();
   }
 
   get isRequired(): boolean {

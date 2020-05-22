@@ -67,14 +67,15 @@
                     "value": "O"
                 }
             ],
-            "filter": false
+            "filter": false,
+            "addOptionLabel": "+ Add More",
+            "helpText": "Other is for Trans-gender"
         }
     },
     {
         "controlName": "dob",
         "label": "DOB",
         "type": "date",
-        "controlStyleClass": "form-control",
         "layoutStyleClass": "col-md-6 col-xs-12",
         "validation": {
             "required": true,

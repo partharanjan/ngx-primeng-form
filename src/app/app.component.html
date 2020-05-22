@@ -1,7 +1,10 @@
-<ngx-primeng-form [form]="form" [items]="formItems"></ngx-primeng-form>
+<div class="container">
+    <ngx-primeng-form [form]="form" [items]="formItems"></ngx-primeng-form>
 
-<div>
-    {{form.value | json}}
+    <button type="button" (click)="submit()">Submit</button>
+
+
+    <div class="mt-3">
+        {{form.value | json}}
+    </div>
 </div>
-
-<button type="button" (click)="submit()">Submit</button>

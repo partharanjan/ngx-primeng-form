@@ -1,6 +1,16 @@
 <div class="form-group">
     <!--Label-->
-    <label>{{label}} <span class="text-danger" *ngIf="isRequired">*</span></label>
+    <label class="w-100">{{label}}
+        <!--For Required field validator-->
+        <span class="text-danger label-required" *ngIf="isRequired">*</span>
+        <!--For help text-->
+        <span *ngIf="helpText" class="pl-2" pTooltip="{{helpText}}" class="label-help-text"><i
+                class="pi pi-info-circle"></i></span>
+        <!--For Add option-->
+        <span class="float-right" *ngIf="addOptionLabel">
+            <a href="javascript:void(0)" class="label-add-option">{{addOptionLabel}}</a>
+        </span>
+    </label>
     <!--Content-->
     <ng-content></ng-content>
     <!--Validation-->

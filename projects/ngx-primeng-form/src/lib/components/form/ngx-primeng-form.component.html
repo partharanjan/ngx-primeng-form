@@ -5,7 +5,8 @@
 
             <div class="{{obj.layoutStyleClass}}">
 
-                <ngx-form-control-layout [label]="obj.label" [form]="form" [control]="obj.controlName">
+                <ngx-form-control-layout [label]="obj.label" [form]="form" [control]="obj.controlName" [helpText]="obj.property.helpText"
+                    [addOptionLabel]="obj.property.addOptionLabel"  (onAddOption)="obj.property.onAddOption()">
 
                     <ng-container [ngSwitch]="obj.type">
 
