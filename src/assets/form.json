@@ -87,7 +87,8 @@
             "regex": null
         },
         "property": {
-            "format": "mm-dd-yy"
+            "format": "mm-dd-yy",
+            "type": "string"
         }
     },
     {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NgxPrimengFormType, INgxPrimengForm, NgxPrimengFormProperty, NgxPrimengFormSelectProperty, NgxPrimengFormRadioProperty, NgxPrimengFormDateProperty, NgxPrimengFormCheckboxProperty, NgxPrimengFormAutoCompleteProperty, INgxPrimengFormValidation, NgxPrimengFormTextProperty, NgxPrimengFormTimeProperty } from '../interfaces/ngx-primeng-form';
+import { NgxPrimengFormType, INgxPrimengForm, NgxPrimengFormProperty, NgxPrimengFormSelectProperty, NgxPrimengFormRadioProperty, NgxPrimengFormDateProperty, NgxPrimengFormCheckboxProperty, NgxPrimengFormAutoCompleteProperty, INgxPrimengFormValidation, NgxPrimengFormTextProperty, NgxPrimengFormTimeProperty, INgxPrimengFormResult } from '../interfaces/ngx-primeng-form';
 import { FormGroup, FormControl, Validators, ValidatorFn, FormBuilder } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
 
@@ -228,28 +228,48 @@ export class NgxPrimengFormService {
     // clear the form gropup
     Object.keys(formGroup.controls).forEach(controlName => {
       formGroup.removeControl(controlName);
-    })
-
-    // set the form group value
-    if (forms && forms.length > 0) {
-      forms.forEach(form => {
-        const validations = this.getValidations(form.validation);
-        formGroup.addControl(form.controlName, new FormControl(form.value, validations));
-      });
-    }
+    });
+    // add controls
+    this.addControl(formGroup, forms);
   }
 
-  createControl(formBuilder: FormBuilder, forms: INgxPrimengForm[]): FormGroup {
+  // prepare form
+  prepareForm(formBuilder: FormBuilder, formJson: INgxPrimengForm[]): INgxPrimengFormResult {
+    // NULL and Length check
+    if (formJson && formJson.length > 0) {
+      // reset the form
+      const formGroup = formBuilder.group({});
+      // prepare the forms
+      this.prepareControl(formGroup, formJson);
+      // prepare the items
+      const items = this.jsonToForm(formJson);
+      // call back
+      return {
+        formGroup: formGroup,
+        forms: items
+      }
+    }
+    return null;
+  }
+
+  //create control
+  createControls(formBuilder: FormBuilder, forms: INgxPrimengForm[]): FormGroup {
     // clear the form gropup
     const formGroup = formBuilder.group({});
-    // set the form group value
+    // add controls
+    this.addControl(formGroup, forms);
+    // return
+    return formGroup;
+  }
+
+  // add controls from forms
+  private addControl(formGroup: FormGroup, forms: INgxPrimengForm[]) {
     if (forms && forms.length > 0) {
       forms.forEach(form => {
         const validations = this.getValidations(form.validation);
         formGroup.addControl(form.controlName, new FormControl(form.value, validations));
       });
     }
-    return formGroup;
   }
 
   // get validations

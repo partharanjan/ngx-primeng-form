@@ -1,4 +1,5 @@
 import { SelectItem } from 'primeng/api';
+import { FormGroup } from '@angular/forms';
 
 export enum NgxPrimengFormType {
     text = 'text',
@@ -109,4 +110,9 @@ export class NgxPrimengFormCheckboxProperty extends NgxPrimengFormProperty {
 export class NgxPrimengFormRadioProperty extends NgxPrimengFormProperty {
     items: SelectItem[] = [];
     containerStyleClass: string;
+}
+
+export interface INgxPrimengFormResult {
+    formGroup: FormGroup;
+    forms: INgxPrimengForm[];
 }
