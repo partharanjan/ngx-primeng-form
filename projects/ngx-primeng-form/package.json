@@ -1,6 +1,20 @@
 {
   "name": "ngx-primeng-form",
-  "version": "0.0.1",
+  "version": "1.0.6",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/partharanjan/ngx-primeng-form.git"
+  },
+  "keywords": [
+    "angular",
+    "form",
+    "generator"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/partharanjan/ngx-primeng-form/issues"
+  },
   "peerDependencies": {
     "@angular/common": "^9.1.4",
     "@angular/core": "^9.1.4",
@@ -8,7 +22,7 @@
     "@angular/cdk": "^9.2.2",
     "primeicons": "^2.0.0",
     "primeng": "^9.0.6",
-    "ngx-material-timepicker": "^5.5.2",
+    "ngx-material-timepicker": ">=5.5.2",
     "tslib": "^1.10.0"
   }
 }

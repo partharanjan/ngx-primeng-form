@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, ValidatorFn } from '@angular/forms';
-import { INgxPrimengForm, NgxPrimengFormProperty } from '../../interfaces/ngx-primeng-form';
+import { INgxPrimengForm, NgxPrimengFormProperty, NgxPrimengFormType } from '../../interfaces/ngx-primeng-form';
 import { SelectItem } from 'primeng/api';
 import { NgxPrimengFormService } from '../../services/ngx-primeng-form.service';
 
@@ -11,10 +11,21 @@ import { NgxPrimengFormService } from '../../services/ngx-primeng-form.service';
 })
 export class NgxPrimengFormComponent implements OnInit {
 
+  _forms: INgxPrimengForm[] = []
   // instance of the froms
   @Input() form: FormGroup;
   // items of control
-  @Input() items: INgxPrimengForm[] = [];
+  @Input()
+  set items(values: INgxPrimengForm[]) {
+    if (values && Array.isArray(values)) {
+      // no need to render custom control
+      this._forms = values.filter(m => m.type != NgxPrimengFormType.custom);
+    }
+  }
+
+  get items(): INgxPrimengForm[] {
+    return this._forms;
+  }
 
   constructor(private service: NgxPrimengFormService) { }
 

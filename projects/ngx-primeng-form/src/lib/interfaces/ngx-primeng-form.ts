@@ -10,7 +10,8 @@ export enum NgxPrimengFormType {
     autocomplete = 'autocomplete',
     checkbox = 'checkbox',
     radio = "radio",
-    textarea = 'textarea'
+    textarea = 'textarea',
+    custom = 'custom'
 }
 
 // primeng form model
@@ -110,6 +111,10 @@ export class NgxPrimengFormCheckboxProperty extends NgxPrimengFormProperty {
 export class NgxPrimengFormRadioProperty extends NgxPrimengFormProperty {
     items: SelectItem[] = [];
     containerStyleClass: string;
+}
+
+export class NgxPrimengFormCustomProperty extends NgxPrimengFormProperty {
+    type: string = 'control';
 }
 
 export interface INgxPrimengFormResult {

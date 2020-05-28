@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { NgxPrimengFormType, INgxPrimengForm, NgxPrimengFormProperty, NgxPrimengFormSelectProperty, NgxPrimengFormRadioProperty, NgxPrimengFormDateProperty, NgxPrimengFormCheckboxProperty, NgxPrimengFormAutoCompleteProperty, INgxPrimengFormValidation, NgxPrimengFormTextProperty, NgxPrimengFormTimeProperty, INgxPrimengFormResult } from '../interfaces/ngx-primeng-form';
-import { FormGroup, FormControl, Validators, ValidatorFn, FormBuilder } from '@angular/forms';
+import { NgxPrimengFormType, INgxPrimengForm, NgxPrimengFormProperty, NgxPrimengFormSelectProperty, NgxPrimengFormRadioProperty, NgxPrimengFormDateProperty, NgxPrimengFormCheckboxProperty, NgxPrimengFormAutoCompleteProperty, INgxPrimengFormValidation, NgxPrimengFormTextProperty, NgxPrimengFormTimeProperty, INgxPrimengFormResult, NgxPrimengFormCustomProperty } from '../interfaces/ngx-primeng-form';
+import { FormGroup, FormControl, Validators, ValidatorFn, FormBuilder, FormArray } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
 
 @Injectable({
@@ -37,6 +37,7 @@ export class NgxPrimengFormService {
       case NgxPrimengFormType.text: { return this.getTextProperty(property); }
       case NgxPrimengFormType.textarea: { return this.getTextProperty(property); }
       case NgxPrimengFormType.time: { return this.getTimeProperty(property); }
+      case NgxPrimengFormType.custom: { return this.getCustomProperty(property); }
       default: { return new NgxPrimengFormProperty() }
     }
   }
@@ -179,6 +180,18 @@ export class NgxPrimengFormService {
     return model;
   }
 
+  // get custom property
+  private getCustomProperty(property: any): NgxPrimengFormCustomProperty {
+    // create model
+    const model = new NgxPrimengFormCustomProperty();
+    // NULL check
+    if (property) {
+      // for format
+      this.setProperty(model, 'type', property);
+    }
+    return model;
+  }
+
   // check that objet has property or not
   private hasProperty(obj: Object, property: string) {
     return obj && obj.hasOwnProperty(property);
@@ -267,7 +280,26 @@ export class NgxPrimengFormService {
     if (forms && forms.length > 0) {
       forms.forEach(form => {
         const validations = this.getValidations(form.validation);
-        formGroup.addControl(form.controlName, new FormControl(form.value, validations));
+        if (form.type == NgxPrimengFormType.custom) {
+          // for custom control
+          const property = form.property as NgxPrimengFormCustomProperty;
+          if (property) {
+            switch (property.type) {
+              case 'array': {
+                formGroup.addControl(form.controlName, new FormArray([], validations));
+              } break;
+              case 'group': {
+                formGroup.addControl(form.controlName, new FormGroup({}, validations));
+              } break;
+              default: {
+                formGroup.addControl(form.controlName, new FormControl(form.value, validations));
+              } break;
+            }
+          }
+        } else {
+          // for normal control
+          formGroup.addControl(form.controlName, new FormControl(form.value, validations));
+        }
       });
     }
   }
