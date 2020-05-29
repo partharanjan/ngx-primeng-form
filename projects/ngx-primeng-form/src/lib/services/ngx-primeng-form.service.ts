@@ -252,10 +252,10 @@ export class NgxPrimengFormService {
     if (formJson && formJson.length > 0) {
       // reset the form
       const formGroup = formBuilder.group({});
-      // prepare the forms
-      this.prepareControl(formGroup, formJson);
       // prepare the items
       const items = this.jsonToForm(formJson);
+      // prepare the forms
+      this.prepareControl(formGroup, items);
       // call back
       return {
         formGroup: formGroup,

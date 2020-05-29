@@ -26,8 +26,9 @@ export class AppComponent implements OnInit {
 
   private loadForms() {
     this.http.get<INgxPrimengForm[]>(`./assets/form.json`).subscribe(forms => {
-      this.service.prepareControl(this.form, forms);
       this.formItems = this.service.jsonToForm(forms);
+      this.service.prepareControl(this.form, this.formItems);
+      
     });
   }
 

@@ -129,5 +129,9 @@
         "property": {
             "type": "number"
         }
+    },
+    {
+        "controlName":"reqId",
+        "type":"custom"
     }
 ]
