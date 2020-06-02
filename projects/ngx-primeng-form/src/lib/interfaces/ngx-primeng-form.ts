@@ -11,7 +11,8 @@ export enum NgxPrimengFormType {
     checkbox = 'checkbox',
     radio = "radio",
     textarea = 'textarea',
-    custom = 'custom'
+    custom = 'custom',
+    editor = 'editor'
 }
 
 // primeng form model
@@ -58,8 +59,8 @@ export class NgxPrimengFormProperty {
     onFocus($event: any) { }
     // on option clicked
     onAddOption() { };
-    // append to
-    appendTo: string = null;
+    // append to default is body
+    appendTo: string = 'body';
     // add option label
     addOptionLabel: string = null;
     // help text
@@ -70,6 +71,13 @@ export class NgxPrimengFormProperty {
 export class NgxPrimengFormTextProperty extends NgxPrimengFormProperty {
     // text type defualt is text
     type: string = 'text';
+    readonly: boolean = false;
+}
+
+// for text box
+export class NgxPrimengFormNumericProperty extends NgxPrimengFormProperty {
+    // currency
+    currency: string = '';
 }
 
 // select property
@@ -98,6 +106,7 @@ export class NgxPrimengFormAutoCompleteProperty extends NgxPrimengFormProperty {
     suggestions: any[] = [];
     minLength: number = 1;
     forceSelection: boolean = false;
+    maxSelectedLabels: number = 3;
     onSearch($event: any) { };
 }
 
@@ -113,8 +122,18 @@ export class NgxPrimengFormRadioProperty extends NgxPrimengFormProperty {
     containerStyleClass: string;
 }
 
+// for custom property
 export class NgxPrimengFormCustomProperty extends NgxPrimengFormProperty {
     type: string = 'control';
+}
+
+// for editor
+export class NgxPrimengFormEditorProperty extends NgxPrimengFormProperty {
+    // text type defualt is text
+    style: any = { 'height': '100px' }
+    formats: string[] = [];
+    modules: any = null;
+    onInit(event: any) { }
 }
 
 export interface INgxPrimengFormResult {

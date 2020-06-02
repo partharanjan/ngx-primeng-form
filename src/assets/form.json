@@ -131,7 +131,19 @@
         }
     },
     {
-        "controlName":"reqId",
-        "type":"custom"
+        "controlName": "reqId",
+        "type": "custom"
+    },
+    {
+        "controlName": "details",
+        "label": "Details",
+        "type": "editor",
+        "layoutStyleClass": "col-md-12 col-xs-12"
+    },
+    {
+        "controlName": "salary",
+        "label": "Salary",
+        "type": "numeric",
+        "layoutStyleClass": "col-md-4 col-xs-12"
     }
 ]

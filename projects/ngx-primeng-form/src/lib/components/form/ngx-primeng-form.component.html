@@ -5,8 +5,9 @@
 
             <div class="{{obj.layoutStyleClass}}">
 
-                <ngx-form-control-layout [label]="obj.label" [form]="form" [control]="obj.controlName" [helpText]="obj.property.helpText"
-                    [addOptionLabel]="obj.property.addOptionLabel"  (onAddOption)="obj.property.onAddOption()">
+                <ngx-form-control-layout [label]="obj.label" [form]="form" [control]="obj.controlName"
+                    [helpText]="obj.property.helpText" [addOptionLabel]="obj.property.addOptionLabel"
+                    (onAddOption)="obj.property.onAddOption()">
 
                     <ng-container [ngSwitch]="obj.type">
 
@@ -16,7 +17,7 @@
                                 [formControlName]="obj.controlName" [name]="obj.id" [id]="obj.id"
                                 [placeholder]="obj.placeholder" (onChange)="obj.property.onChange($event)"
                                 (onBlur)="obj.property.onBlur($event)" (onFocus)="obj.property.onFocus($event)"
-                                autocomplete="off" />
+                                autocomplete="off" [readonly]="obj.property.readonly" />
                         </ng-container>
 
                         <!--Dropdown-->
@@ -36,7 +37,7 @@
                                 [options]="obj.property.options" [filter]="obj.property.filter"
                                 (onChange)="obj.property.onChange($event)" [name]="obj.id" [inputId]="obj.id"
                                 (onBlur)="obj.property.onBlur($event)" (onFocus)="obj.property.onFocus($event)"
-                                [appendTo]="obj.property.appendTo">
+                                [appendTo]="obj.property.appendTo" [maxSelectedLabels]="obj.property.maxSelectedLabels">
                             </p-multiSelect>
                         </ng-container>
 
@@ -101,7 +102,25 @@
                             <textarea class="{{obj.controlStyleClass}}" [formControlName]="obj.controlName"
                                 [name]="obj.id" [id]="obj.id" [placeholder]="obj.placeholder" autocomplete="off"
                                 (onChange)="obj.property.onChange($event)" (onBlur)="obj.property.onBlur($event)"
-                                (onFocus)="obj.property.onFocus($event)"></textarea>
+                                (onFocus)="obj.property.onFocus($event)" [readonly]="obj.property.readonly"></textarea>
+                        </ng-container>
+
+                        <!--Editor-->
+                        <ng-container *ngSwitchCase="'editor'">
+                            <p-editor [formControlName]="obj.controlName" [style]="obj.property.style"
+                                [styleClass]="obj.controlStyleClass" [placeholder]="obj.placeholder"
+                                [readonly]="obj.property.readonly" [formats]="obj.property.formats"
+                                [modules]="obj.property.modules" (onTextChange)="obj.property.onChange($event)"
+                                (onInit)="obj.property.onInit($event)">
+                                <p-header>
+                                    <span class="ql-formats">
+                                        <button class="ql-bold" aria-label="Bold"></button>
+                                        <button class="ql-italic" aria-label="Italic"></button>
+                                        <button class="ql-underline" aria-label="Underline"></button>
+                                        <button class="ql-link" aria-label="Link"></button>
+                                    </span>
+                                </p-header>
+                            </p-editor>
                         </ng-container>
 
                     </ng-container>

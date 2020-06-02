@@ -8,7 +8,7 @@
                 class="pi pi-info-circle"></i></span>
         <!--For Add option-->
         <span class="float-right" *ngIf="addOptionLabel">
-            <a href="javascript:void(0)" class="label-add-option">{{addOptionLabel}}</a>
+            <a href="javascript:void(0)" class="label-add-option" (click)="handleOnAdd()">{{addOptionLabel}}</a>
         </span>
     </label>
     <!--Content-->

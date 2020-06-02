@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NgxPrimengFormType, INgxPrimengForm, NgxPrimengFormProperty, NgxPrimengFormSelectProperty, NgxPrimengFormRadioProperty, NgxPrimengFormDateProperty, NgxPrimengFormCheckboxProperty, NgxPrimengFormAutoCompleteProperty, INgxPrimengFormValidation, NgxPrimengFormTextProperty, NgxPrimengFormTimeProperty, INgxPrimengFormResult, NgxPrimengFormCustomProperty } from '../interfaces/ngx-primeng-form';
+import { NgxPrimengFormType, INgxPrimengForm, NgxPrimengFormProperty, NgxPrimengFormSelectProperty, NgxPrimengFormRadioProperty, NgxPrimengFormDateProperty, NgxPrimengFormCheckboxProperty, NgxPrimengFormAutoCompleteProperty, INgxPrimengFormValidation, NgxPrimengFormTextProperty, NgxPrimengFormTimeProperty, INgxPrimengFormResult, NgxPrimengFormCustomProperty, NgxPrimengFormNumericProperty, NgxPrimengFormEditorProperty } from '../interfaces/ngx-primeng-form';
 import { FormGroup, FormControl, Validators, ValidatorFn, FormBuilder, FormArray } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
 
@@ -38,6 +38,7 @@ export class NgxPrimengFormService {
       case NgxPrimengFormType.textarea: { return this.getTextProperty(property); }
       case NgxPrimengFormType.time: { return this.getTimeProperty(property); }
       case NgxPrimengFormType.custom: { return this.getCustomProperty(property); }
+      case NgxPrimengFormType.editor: { return this.getEditorProperty(property); }
       default: { return new NgxPrimengFormProperty() }
     }
   }
@@ -78,6 +79,21 @@ export class NgxPrimengFormService {
       this.setSharedProperty(model, property);
       // for type
       this.setProperty(model, 'type', property);
+      // for readonly
+      this.setProperty(model, 'readonly', property, false);
+    }
+    return model;
+  }
+
+  private getNumericProperty(property: any): NgxPrimengFormNumericProperty {
+    // create model
+    const model = new NgxPrimengFormNumericProperty();
+    // NULL check
+    if (property) {
+      // shared property
+      this.setSharedProperty(model, property);
+      // for currency
+      this.setProperty(model, 'currency', property);
     }
     return model;
   }
@@ -110,6 +126,8 @@ export class NgxPrimengFormService {
       this.setProperty(model, 'minLength', property);
       // for options
       this.setProperty(model, 'forceSelection', property, false);
+      // set maxSelectedLabels
+      this.setProperty(model, 'maxSelectedLabels', property);
     }
     return model;
   }
@@ -188,6 +206,26 @@ export class NgxPrimengFormService {
     if (property) {
       // for format
       this.setProperty(model, 'type', property);
+    }
+    return model;
+  }
+
+  // get editor property
+  private getEditorProperty(property: any): NgxPrimengFormEditorProperty {
+    // create model
+    const model = new NgxPrimengFormEditorProperty();
+    // NULL check
+    if (property) {
+      // shared property
+      this.setSharedProperty(model, property);
+      // for style
+      this.setProperty(model, 'style', property);
+      // for formats
+      this.setProperty(model, 'formats', property);
+      // for modules
+      this.setProperty(model, 'modules', property);
+      // for readonly
+      this.setProperty(model, 'readonly', property, false);
     }
     return model;
   }

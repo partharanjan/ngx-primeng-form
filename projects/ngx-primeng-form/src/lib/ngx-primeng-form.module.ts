@@ -8,6 +8,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { TooltipModule } from 'primeng/tooltip';
+import { EditorModule } from 'primeng/editor';
 
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
@@ -34,7 +35,8 @@ const components = [
     RadioButtonModule,
     AutoCompleteModule,
     NgxMaterialTimepickerModule,
-    TooltipModule
+    TooltipModule,
+    EditorModule
   ],
   exports: [...components]
 })
