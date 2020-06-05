@@ -144,6 +144,8 @@ export class NgxPrimengFormService {
       this.setProperty(model, 'format', property);
       // for type
       this.setProperty(model, 'type', property);
+      // for view
+      this.setProperty(model, 'view', property);
     }
     return model;
   }

@@ -93,6 +93,7 @@ export class NgxPrimengFormDateProperty extends NgxPrimengFormProperty {
     maxDate: Date = null;
     format: string = 'dd-mm-yy';
     type: string = 'date';
+    view: string = 'date';
 }
 
 export class NgxPrimengFormTimeProperty extends NgxPrimengFormProperty {

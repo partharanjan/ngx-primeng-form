@@ -1,6 +1,7 @@
-<ng-container [formGroup]="form">
-    <div class="row">
+<div class="row">
 
+    <!--From Configuration-->
+    <ng-container [formGroup]="form">
         <ng-container *ngFor="let obj of items;trackBy:trackByControlName">
 
             <div class="{{obj.layoutStyleClass}}">
@@ -49,7 +50,7 @@
                                 [maxDate]="obj.property.maxDate" [dateFormat]="obj.property.format"
                                 (onSelect)="obj.property.onChange($event)" (onInput)="obj.property.onChange($event)"
                                 (onBlur)="obj.property.onBlur($event)" (onFocus)="obj.property.onFocus($event)"
-                                [appendTo]="obj.property.appendTo" [dataType]="obj.property.type">
+                                [appendTo]="obj.property.appendTo" [dataType]="obj.property.type" [view]="obj.property.view">
                             </p-calendar>
                         </ng-container>
 
@@ -130,6 +131,9 @@
             </div>
 
         </ng-container>
+    </ng-container>
 
-    </div>
-</ng-container>
+    <!--Inside content of form-->
+    <ng-content></ng-content>
+
+</div>
