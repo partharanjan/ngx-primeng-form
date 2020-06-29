@@ -84,6 +84,8 @@ export class NgxPrimengFormNumericProperty extends NgxPrimengFormProperty {
 export class NgxPrimengFormSelectProperty extends NgxPrimengFormProperty {
     filter: boolean = true;
     options: SelectItem[] = [];
+    maxSelectedLabels: number = 3;
+    showClear: boolean = true;
 }
 
 // date property
@@ -107,7 +109,6 @@ export class NgxPrimengFormAutoCompleteProperty extends NgxPrimengFormProperty {
     suggestions: any[] = [];
     minLength: number = 1;
     forceSelection: boolean = false;
-    maxSelectedLabels: number = 3;
     onSearch($event: any) { };
 }
 

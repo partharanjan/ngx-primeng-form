@@ -77,6 +77,9 @@ export class InlineFormValidationComponent implements OnInit, OnDestroy {
         case 'pattern': {
           return `Invalid ${this.displayName} format`;
         }
+        case 'email': {
+          return 'Invalid email format';
+        }
         default: {
           if (control.errors.hasOwnProperty(errorIds[0])) {
             return control.errors[errorIds[0]];

@@ -25,7 +25,7 @@
                         <ng-container *ngSwitchCase="'select'">
                             <p-dropdown [styleClass]="obj.controlStyleClass" [formControlName]="obj.controlName"
                                 [options]="obj.property.options" [placeholder]="obj.placeholder"
-                                [filter]="obj.property.filter" [autoDisplayFirst]="false" [showClear]="true"
+                                [filter]="obj.property.filter" [autoDisplayFirst]="false" [showClear]="obj.property.showClear"
                                 (onChange)="obj.property.onChange($event)" [name]="obj.id" [inputId]="obj.id"
                                 (onBlur)="obj.property.onBlur($event)" (onFocus)="obj.property.onFocus($event)"
                                 [appendTo]="obj.property.appendTo">

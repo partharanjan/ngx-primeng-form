@@ -110,6 +110,10 @@ export class NgxPrimengFormService {
       this.setProperty(model, 'options', property);
       // for filter
       this.setProperty(model, 'filter', property, false);
+      // set maxSelectedLabels
+      this.setProperty(model, 'maxSelectedLabels', property);
+      // show clear
+      this.setProperty(model, 'showClear', property, false);
     }
     return model;
   }
@@ -126,8 +130,6 @@ export class NgxPrimengFormService {
       this.setProperty(model, 'minLength', property);
       // for options
       this.setProperty(model, 'forceSelection', property, false);
-      // set maxSelectedLabels
-      this.setProperty(model, 'maxSelectedLabels', property);
     }
     return model;
   }

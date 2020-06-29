@@ -10,7 +10,7 @@
         "value": "",
         "validation": {
             "required": true,
-            "email": null,
+            "email": true,
             "minLength": 0,
             "maxLength": 255,
             "min": 0,
@@ -69,7 +69,8 @@
             ],
             "filter": false,
             "addOptionLabel": "+ Add More",
-            "helpText": "Other is for Trans-gender"
+            "helpText": "Other is for Trans-gender",
+            "showClear":true
         }
     },
     {
