@@ -2,7 +2,7 @@
 
     <!--From Configuration-->
     <ng-container [formGroup]="form">
-        <ng-container *ngFor="let obj of items;trackBy:trackByControlName">
+        <ng-container *ngFor="let obj of _forms;trackBy:trackByControlName">
 
             <div class="{{obj.layoutStyleClass}}">
 
@@ -25,10 +25,10 @@
                         <ng-container *ngSwitchCase="'select'">
                             <p-dropdown [styleClass]="obj.controlStyleClass" [formControlName]="obj.controlName"
                                 [options]="obj.property.options" [placeholder]="obj.placeholder"
-                                [filter]="obj.property.filter" [autoDisplayFirst]="false" [showClear]="obj.property.showClear"
-                                (onChange)="obj.property.onChange($event)" [name]="obj.id" [inputId]="obj.id"
-                                (onBlur)="obj.property.onBlur($event)" (onFocus)="obj.property.onFocus($event)"
-                                [appendTo]="obj.property.appendTo">
+                                [filter]="obj.property.filter" [autoDisplayFirst]="false"
+                                [showClear]="obj.property.showClear" (onChange)="obj.property.onChange($event)"
+                                [name]="obj.id" [inputId]="obj.id" (onBlur)="obj.property.onBlur($event)"
+                                (onFocus)="obj.property.onFocus($event)" [appendTo]="obj.property.appendTo">
                             </p-dropdown>
                         </ng-container>
 
@@ -50,20 +50,9 @@
                                 [maxDate]="obj.property.maxDate" [dateFormat]="obj.property.format"
                                 (onSelect)="obj.property.onChange($event)" (onInput)="obj.property.onChange($event)"
                                 (onBlur)="obj.property.onBlur($event)" (onFocus)="obj.property.onFocus($event)"
-                                [appendTo]="obj.property.appendTo" [dataType]="obj.property.type" [view]="obj.property.view">
+                                [appendTo]="obj.property.appendTo" [dataType]="obj.property.type"
+                                [view]="obj.property.view">
                             </p-calendar>
-                        </ng-container>
-
-                        <!--Time Picker-->
-                        <ng-container *ngSwitchCase="'time'">
-                            <input type="text" class="{{obj.controlStyleClass}}" [formControlName]="obj.controlName"
-                                [name]="obj.id" [id]="obj.id" [placeholder]="obj.placeholder"
-                                (onChange)="obj.property.onChange($event)" (onBlur)="obj.property.onBlur($event)"
-                                (onFocus)="obj.property.onFocus($event)" autocomplete="off"
-                                [ngxTimepicker]="materialTimePicker" readonly />
-                            <ngx-material-timepicker #materialTimePicker [minutesGap]="obj.property.gap"
-                                [appendToInput]="obj.property.appendToInput" [format]="obj.property.format">
-                            </ngx-material-timepicker>
                         </ng-container>
 
                         <!--autocomplete-->
@@ -122,6 +111,12 @@
                                     </span>
                                 </p-header>
                             </p-editor>
+                        </ng-container>
+
+                        <!--Custom Control-->
+                        <ng-container *ngSwitchCase="'custom'">
+                            <ng-container *ngTemplateOutlet="customControlTemplate;context:{control:obj}">
+                            </ng-container>
                         </ng-container>
 
                     </ng-container>

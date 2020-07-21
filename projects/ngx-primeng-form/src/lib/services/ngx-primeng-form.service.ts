@@ -1,5 +1,20 @@
 import { Injectable } from '@angular/core';
-import { NgxPrimengFormType, INgxPrimengForm, NgxPrimengFormProperty, NgxPrimengFormSelectProperty, NgxPrimengFormRadioProperty, NgxPrimengFormDateProperty, NgxPrimengFormCheckboxProperty, NgxPrimengFormAutoCompleteProperty, INgxPrimengFormValidation, NgxPrimengFormTextProperty, NgxPrimengFormTimeProperty, INgxPrimengFormResult, NgxPrimengFormCustomProperty, NgxPrimengFormNumericProperty, NgxPrimengFormEditorProperty } from '../interfaces/ngx-primeng-form';
+import {
+  NgxPrimengFormType,
+  INgxPrimengForm,
+  NgxPrimengFormProperty,
+  NgxPrimengFormSelectProperty,
+  NgxPrimengFormRadioProperty,
+  NgxPrimengFormDateProperty,
+  NgxPrimengFormCheckboxProperty,
+  NgxPrimengFormAutoCompleteProperty,
+  INgxPrimengFormValidation,
+  NgxPrimengFormTextProperty,
+  INgxPrimengFormResult,
+  NgxPrimengFormCustomProperty,
+  NgxPrimengFormNumericProperty,
+  NgxPrimengFormEditorProperty
+} from '../interfaces/ngx-primeng-form';
 import { FormGroup, FormControl, Validators, ValidatorFn, FormBuilder, FormArray } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
 
@@ -36,7 +51,6 @@ export class NgxPrimengFormService {
       case NgxPrimengFormType.select: { return this.getSelectProperty(property); }
       case NgxPrimengFormType.text: { return this.getTextProperty(property); }
       case NgxPrimengFormType.textarea: { return this.getTextProperty(property); }
-      case NgxPrimengFormType.time: { return this.getTimeProperty(property); }
       case NgxPrimengFormType.custom: { return this.getCustomProperty(property); }
       case NgxPrimengFormType.editor: { return this.getEditorProperty(property); }
       default: { return new NgxPrimengFormProperty() }
@@ -152,24 +166,6 @@ export class NgxPrimengFormService {
     return model;
   }
 
-  // get textbox property
-  private getTimeProperty(property: any): NgxPrimengFormTimeProperty {
-    // create model
-    const model = new NgxPrimengFormTimeProperty();
-    // NULL check
-    if (property) {
-      // shared property
-      this.setSharedProperty(model, property);
-      // for format
-      this.setProperty(model, 'gap', property);
-      // for format
-      this.setProperty(model, 'format', property);
-      // for format
-      this.setProperty(model, 'appendToInput', property, false);
-    }
-    return model;
-  }
-
   // get checkbox property
   private getCheckboxProperty(property: any): NgxPrimengFormCheckboxProperty {
     // create model
@@ -208,6 +204,8 @@ export class NgxPrimengFormService {
     const model = new NgxPrimengFormCustomProperty();
     // NULL check
     if (property) {
+      // shared property
+      this.setSharedProperty(model, property);
       // for format
       this.setProperty(model, 'type', property);
     }
@@ -322,6 +320,7 @@ export class NgxPrimengFormService {
     if (forms && forms.length > 0) {
       forms.forEach(form => {
         const validations = this.getValidations(form.validation);
+        // check for both custom and custom control
         if (form.type == NgxPrimengFormType.custom) {
           // for custom control
           const property = form.property as NgxPrimengFormCustomProperty;

@@ -1,5 +1,12 @@
 <div class="container">
-    <ngx-primeng-form [form]="form" [items]="formItems"></ngx-primeng-form>
+    <ngx-primeng-form [form]="form" [items]="formItems">
+
+        <!--Custom control-->
+        <ng-template formTemplate="custom" let-control="control">
+            {{control|json}}
+        </ng-template>
+
+    </ngx-primeng-form>
 
     <button type="button" (click)="submit()">Submit</button>
 

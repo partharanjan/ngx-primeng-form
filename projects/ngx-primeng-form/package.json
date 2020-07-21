@@ -1,6 +1,6 @@
 {
   "name": "ngx-primeng-form",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/partharanjan/ngx-primeng-form.git"
@@ -22,7 +22,6 @@
     "@angular/cdk": "^9.2.2",
     "primeicons": "^2.0.0",
     "primeng": "^9.0.6",
-    "ngx-material-timepicker": ">=5.5.2",
     "tslib": "^1.10.0"
   }
 }

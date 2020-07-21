@@ -10,16 +10,16 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { TooltipModule } from 'primeng/tooltip';
 import { EditorModule } from 'primeng/editor';
 
-import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
-
 import { NgxPrimengFormComponent } from './components/form/ngx-primeng-form.component';
 import { FormControlLayoutComponent } from './components/form-control-layout/form-control-layout.component';
 import { InlineFormValidationComponent } from './components/inline-form-validation/inline-form-validation.component';
+import { NgxFormTemplate } from './directives/form-template';
 
 const components = [
   NgxPrimengFormComponent,
   FormControlLayoutComponent,
-  InlineFormValidationComponent
+  InlineFormValidationComponent,
+  NgxFormTemplate
 ];
 
 @NgModule({
@@ -34,7 +34,6 @@ const components = [
     CheckboxModule,
     RadioButtonModule,
     AutoCompleteModule,
-    NgxMaterialTimepickerModule,
     TooltipModule,
     EditorModule
   ],

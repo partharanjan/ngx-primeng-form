@@ -1,42 +1,57 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ContentChildren, QueryList, AfterContentInit, TemplateRef } from '@angular/core';
 import { FormGroup, ValidatorFn } from '@angular/forms';
 import { INgxPrimengForm, NgxPrimengFormProperty, NgxPrimengFormType } from '../../interfaces/ngx-primeng-form';
 import { SelectItem } from 'primeng/api';
 import { NgxPrimengFormService } from '../../services/ngx-primeng-form.service';
+import { NgxFormTemplate } from '../../directives/form-template';
 
 @Component({
   selector: 'ngx-primeng-form',
   templateUrl: './ngx-primeng-form.component.html',
   styles: []
 })
-export class NgxPrimengFormComponent implements OnInit {
+export class NgxPrimengFormComponent implements OnInit, AfterContentInit {
 
-  _forms: INgxPrimengForm[] = []
+  // templates
+  @ContentChildren(NgxFormTemplate) templates: QueryList<NgxFormTemplate>;
+  // form 
+  _forms: INgxPrimengForm[] = [];
   // instance of the froms
   @Input() form: FormGroup;
   // items of control
   @Input()
   set items(values: INgxPrimengForm[]) {
     if (values && Array.isArray(values)) {
-      // no need to render custom control
-      this._forms = values.filter(m => m.type != NgxPrimengFormType.custom);
+      this._forms = values;
     }
   }
 
-  get items(): INgxPrimengForm[] {
-    return this._forms;
-  }
+  // custom template
+  customControlTemplate: TemplateRef<any>;
 
   constructor(private service: NgxPrimengFormService) { }
 
   ngOnInit(): void { }
+
+  ngAfterContentInit() {
+    if (this.templates) {
+      this.templates.forEach((item) => {
+        switch (item.getType()) {
+          case 'custom': {
+            this.customControlTemplate = item.template;
+          } break;
+        }
+      });
+    }
+  }
+
 
   trackByControlName(index: number, el: INgxPrimengForm): string {
     return el.controlName;
   }
 
   getControl(controlName: string): INgxPrimengForm {
-    return this.items.find(m => m.controlName.toLowerCase() == controlName.toLowerCase());
+    return this._forms.find(m => m.controlName.toLowerCase() == controlName.toLowerCase());
   }
 
   getValidations(controlName: string): ValidatorFn[] {
@@ -45,15 +60,14 @@ export class NgxPrimengFormComponent implements OnInit {
       return this.service.getValidations(control.validation);
     }
     return [];
-
   }
 
   setSelectItems(controlName: string, items: SelectItem[]) {
-    this.service.setSelectItems(this.items, controlName, items);
+    this.service.setSelectItems(this._forms, controlName, items);
   }
 
   getProperty<T extends NgxPrimengFormProperty>(controlName: string): T {
-    return this.service.getProperty(controlName, this.items);
+    return this.service.getProperty(controlName, this._forms);
   }
 
 }

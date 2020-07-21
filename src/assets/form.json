@@ -70,7 +70,7 @@
             "filter": false,
             "addOptionLabel": "+ Add More",
             "helpText": "Other is for Trans-gender",
-            "showClear":true
+            "showClear": true
         }
     },
     {
@@ -132,8 +132,13 @@
         }
     },
     {
-        "controlName": "reqId",
-        "type": "custom"
+        "controlName": "customControlId",
+        "label": "Custom Control",
+        "layoutStyleClass": "col-md-6 col-xs-12",
+        "type": "custom",
+        "validation":{
+            "required":true
+        }
     },
     {
         "controlName": "details",

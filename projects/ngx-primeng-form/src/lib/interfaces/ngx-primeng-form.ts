@@ -6,7 +6,6 @@ export enum NgxPrimengFormType {
     select = 'select',
     multiselect = 'multiselect',
     date = 'date',
-    time = 'time',
     autocomplete = 'autocomplete',
     checkbox = 'checkbox',
     radio = "radio",
@@ -96,12 +95,6 @@ export class NgxPrimengFormDateProperty extends NgxPrimengFormProperty {
     format: string = 'dd-mm-yy';
     type: string = 'date';
     view: string = 'date';
-}
-
-export class NgxPrimengFormTimeProperty extends NgxPrimengFormProperty {
-    gap: number = 5;
-    format: string = '12';
-    appendToInput: boolean = false;
 }
 
 // autocomplete property
