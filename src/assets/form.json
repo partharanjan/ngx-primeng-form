@@ -88,7 +88,7 @@
             "regex": null
         },
         "property": {
-            "format": "mm-dd-yy",
+            "format": "dd-mm-yy",
             "type": "string"
         }
     },
@@ -136,8 +136,8 @@
         "label": "Custom Control",
         "layoutStyleClass": "col-md-6 col-xs-12",
         "type": "custom",
-        "validation":{
-            "required":true
+        "validation": {
+            "required": true
         }
     },
     {

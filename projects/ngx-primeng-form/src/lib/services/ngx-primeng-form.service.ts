@@ -222,8 +222,6 @@ export class NgxPrimengFormService {
       this.setSharedProperty(model, property);
       // for style
       this.setProperty(model, 'style', property);
-      // for formats
-      this.setProperty(model, 'formats', property);
       // for modules
       this.setProperty(model, 'modules', property);
       // for readonly

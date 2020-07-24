@@ -99,9 +99,8 @@
                         <ng-container *ngSwitchCase="'editor'">
                             <p-editor [formControlName]="obj.controlName" [style]="obj.property.style"
                                 [styleClass]="obj.controlStyleClass" [placeholder]="obj.placeholder"
-                                [readonly]="obj.property.readonly" [formats]="obj.property.formats"
-                                [modules]="obj.property.modules" (onTextChange)="obj.property.onChange($event)"
-                                (onInit)="obj.property.onInit($event)">
+                                [readonly]="obj.property.readonly" [modules]="obj.property.modules"
+                                (onTextChange)="obj.property.onChange($event)" (onInit)="obj.property.onInit($event)">
                                 <p-header>
                                     <span class="ql-formats">
                                         <button class="ql-bold" aria-label="Bold"></button>

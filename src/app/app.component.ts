@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
     this.http.get<INgxPrimengForm[]>(`./assets/form.json`).subscribe(forms => {
       this.formItems = this.service.jsonToForm(forms);
       this.service.prepareControl(this.form, this.formItems);
-      
+      this.form.controls['dob'].setValue('24-07-2020');
     });
   }
 

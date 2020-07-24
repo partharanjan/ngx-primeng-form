@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ContentChildren, QueryList, AfterContentInit, TemplateRef } from '@angular/core';
 import { FormGroup, ValidatorFn } from '@angular/forms';
-import { INgxPrimengForm, NgxPrimengFormProperty, NgxPrimengFormType } from '../../interfaces/ngx-primeng-form';
+import { INgxPrimengForm, NgxPrimengFormProperty } from '../../interfaces/ngx-primeng-form';
 import { SelectItem } from 'primeng/api';
 import { NgxPrimengFormService } from '../../services/ngx-primeng-form.service';
 import { NgxFormTemplate } from '../../directives/form-template';
@@ -44,7 +44,6 @@ export class NgxPrimengFormComponent implements OnInit, AfterContentInit {
       });
     }
   }
-
 
   trackByControlName(index: number, el: INgxPrimengForm): string {
     return el.controlName;

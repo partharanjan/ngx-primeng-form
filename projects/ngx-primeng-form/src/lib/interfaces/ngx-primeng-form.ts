@@ -126,7 +126,6 @@ export class NgxPrimengFormCustomProperty extends NgxPrimengFormProperty {
 export class NgxPrimengFormEditorProperty extends NgxPrimengFormProperty {
     // text type defualt is text
     style: any = { 'height': '100px' }
-    formats: string[] = [];
     modules: any = null;
     onInit(event: any) { }
 }
