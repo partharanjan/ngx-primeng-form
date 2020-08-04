@@ -53,6 +53,7 @@ export class NgxPrimengFormService {
       case NgxPrimengFormType.textarea: { return this.getTextProperty(property); }
       case NgxPrimengFormType.custom: { return this.getCustomProperty(property); }
       case NgxPrimengFormType.editor: { return this.getEditorProperty(property); }
+      case NgxPrimengFormType.placeholder: { return this.getPlaceholderProperty(property); }
       default: { return new NgxPrimengFormProperty() }
     }
   }
@@ -206,8 +207,10 @@ export class NgxPrimengFormService {
     if (property) {
       // shared property
       this.setSharedProperty(model, property);
-      // for format
-      this.setProperty(model, 'type', property);
+      // controlType
+      this.setProperty(model, 'controlType', property);
+      // for field Type
+      this.setProperty(model, 'fieldType', property);
     }
     return model;
   }
@@ -226,6 +229,18 @@ export class NgxPrimengFormService {
       this.setProperty(model, 'modules', property);
       // for readonly
       this.setProperty(model, 'readonly', property, false);
+    }
+    return model;
+  }
+
+  // get textbox property
+  private getPlaceholderProperty(property: any): NgxPrimengFormProperty {
+    // create model
+    const model = new NgxPrimengFormProperty();
+    // NULL check
+    if (property) {
+      // shared property
+      this.setSharedProperty(model, property);
     }
     return model;
   }
@@ -316,29 +331,35 @@ export class NgxPrimengFormService {
   // add controls from forms
   private addControl(formGroup: FormGroup, forms: INgxPrimengForm[]) {
     if (forms && forms.length > 0) {
+      // form ignore types
+      const ignoreTypes: NgxPrimengFormType[] = [NgxPrimengFormType.placeholder];
       forms.forEach(form => {
-        const validations = this.getValidations(form.validation);
-        // check for both custom and custom control
-        if (form.type == NgxPrimengFormType.custom) {
-          // for custom control
-          const property = form.property as NgxPrimengFormCustomProperty;
-          if (property) {
-            switch (property.type) {
-              case 'array': {
-                formGroup.addControl(form.controlName, new FormArray([], validations));
-              } break;
-              case 'group': {
-                formGroup.addControl(form.controlName, new FormGroup({}, validations));
-              } break;
-              default: {
-                formGroup.addControl(form.controlName, new FormControl(form.value, validations));
-              } break;
+        // check for ignore controls
+        if (ignoreTypes.indexOf(form.type) == -1) {
+          const validations = this.getValidations(form.validation);
+          // check for both custom and custom control
+          if (form.type == NgxPrimengFormType.custom) {
+            // for custom control
+            const property = form.property as NgxPrimengFormCustomProperty;
+            if (property) {
+              switch (property.controlType) {
+                case 'array': {
+                  formGroup.addControl(form.controlName, new FormArray([], validations));
+                } break;
+                case 'group': {
+                  formGroup.addControl(form.controlName, new FormGroup({}, validations));
+                } break;
+                default: {
+                  formGroup.addControl(form.controlName, new FormControl(form.value, validations));
+                } break;
+              }
             }
+          } else {
+            // for normal control
+            formGroup.addControl(form.controlName, new FormControl(form.value, validations));
           }
-        } else {
-          // for normal control
-          formGroup.addControl(form.controlName, new FormControl(form.value, validations));
         }
+
       });
     }
   }

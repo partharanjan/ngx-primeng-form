@@ -147,9 +147,8 @@
         "layoutStyleClass": "col-md-12 col-xs-12"
     },
     {
-        "controlName": "salary",
-        "label": "Salary",
-        "type": "numeric",
-        "layoutStyleClass": "col-md-4 col-xs-12"
+        "controlName": "placeholder",
+        "type": "placeholder",
+        "layoutStyleClass": "col-md-12 col-xs-12"
     }
 ]

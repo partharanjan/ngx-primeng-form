@@ -11,7 +11,8 @@ export enum NgxPrimengFormType {
     radio = "radio",
     textarea = 'textarea',
     custom = 'custom',
-    editor = 'editor'
+    editor = 'editor',
+    placeholder = 'placeholder'
 }
 
 // primeng form model
@@ -39,13 +40,13 @@ export interface INgxPrimengForm {
 }
 
 export interface INgxPrimengFormValidation {
-    required: boolean;
-    email: boolean;
-    minLength: number;
-    maxLength: number;
-    min: number;
-    max: number;
-    regex: string;
+    required?: boolean;
+    email?: boolean;
+    minLength?: number;
+    maxLength?: number;
+    min?: number;
+    max?: number;
+    regex?: string;
 }
 
 // form property
@@ -119,7 +120,8 @@ export class NgxPrimengFormRadioProperty extends NgxPrimengFormProperty {
 
 // for custom property
 export class NgxPrimengFormCustomProperty extends NgxPrimengFormProperty {
-    type: string = 'control';
+    controlType: string = 'control';
+    fieldType?: string;
 }
 
 // for editor
@@ -129,6 +131,7 @@ export class NgxPrimengFormEditorProperty extends NgxPrimengFormProperty {
     modules: any = null;
     onInit(event: any) { }
 }
+
 
 export interface INgxPrimengFormResult {
     formGroup: FormGroup;
