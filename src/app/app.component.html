@@ -1,22 +1,40 @@
 <div class="container">
-    <ngx-primeng-form [form]="form" [items]="formItems">
+    <div class="row justify-content-md-center">
+        <div class="col-6">
+            <div class="card mt-3 mb-3">
+                <div class="card-header">
+                    <h5 class="card-titlw">JSON</h5>
+                </div>
+                <div class="card-body" style="max-height: 500px;overflow-y:auto">
+                    <pre>{{formItems|json}}</pre>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mt-3 mb-3">
+                <div class="card-header">
+                    <h5 class="card-titlw">User Registration Form</h5>
+                </div>
+                <div class="card-body">
+                    <ngx-primeng-form [form]="form" [items]="formItems">
 
-        <!--Custom control-->
-        <ng-template formTemplate="custom" let-control="control">
-            {{control|json}}
-        </ng-template>
+                        <!--Custom control-->
+                        <ng-template formTemplate="custom" let-control="control">
+                            {{control|json}}
+                        </ng-template>
 
-        <!--Placeholder-->
-        <ng-template formTemplate="placeholder" let-control="control">
-            {{control|json}}
-        </ng-template>
+                        <!--Placeholder-->
+                        <ng-template formTemplate="placeholder" let-control="control">
+                            {{control|json}}
+                        </ng-template>
 
-    </ngx-primeng-form>
-
-    <button type="button" (click)="submit()">Submit</button>
-
-
-    <div class="mt-3">
-        {{form.value | json}}
+                    </ngx-primeng-form>
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-sm btn-primary" (click)="submit()">Submit</button>
+                </div>
+            </div>
+        </div>
     </div>
+
 </div>
