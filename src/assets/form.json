@@ -10,12 +10,7 @@
         "value": "",
         "validation": {
             "required": true,
-            "email": true,
-            "minLength": 0,
-            "maxLength": 255,
-            "min": 0,
-            "max": 0,
-            "regex": null
+            "maxLength": 100
         }
     },
     {
@@ -29,12 +24,7 @@
         "value": "",
         "validation": {
             "required": true,
-            "email": null,
-            "minLength": 0,
-            "maxLength": 500,
-            "min": 0,
-            "max": 0,
-            "regex": null
+            "maxLength": 100
         }
     },
     {
@@ -67,10 +57,7 @@
                     "value": "O"
                 }
             ],
-            "filter": false,
-            "addOptionLabel": "+ Add More",
-            "helpText": "Other is for Trans-gender",
-            "showClear": true
+            "filter": false
         }
     },
     {
@@ -93,62 +80,59 @@
         }
     },
     {
-        "controlName": "votingTime",
-        "label": "Voting Time",
-        "type": "time",
-        "controlStyleClass": "form-control",
-        "layoutStyleClass": "col-md-6 col-xs-12",
-        "validation": {
-            "required": true
-        }
-    },
-    {
-        "controlName": "visitTime",
-        "label": "Visit Time",
-        "type": "time",
-        "controlStyleClass": "form-control",
-        "layoutStyleClass": "col-md-6 col-xs-12",
-        "value": "10:00 AM",
-        "validation": {
-            "required": true
-        },
-        "property": {
-            "gap": 15
-        }
-    },
-    {
-        "controlName": "age",
-        "label": "Age",
+        "controlName": "email",
+        "id": "email",
+        "label": "Email",
         "type": "text",
         "controlStyleClass": "form-control",
         "layoutStyleClass": "col-md-6 col-xs-12",
-        "value": "10:00 AM",
+        "placeholder": "Enter Email ID",
+        "value": "",
         "validation": {
-            "min": 18,
-            "max": 30
+            "required": true,
+            "email":true,
+            "maxLength": 50
+        },
+        "property":{
+            "type":"email"
+        }
+    },
+    {
+        "controlName": "role",
+        "label": "Permission",
+        "type": "multiselect",
+        "controlStyleClass": "d-block",
+        "layoutStyleClass": "col-md-6 col-xs-12",
+        "validation": {
+            "required": true,
+            "email": null,
+            "minLength": 0,
+            "maxLength": 500,
+            "min": 0,
+            "max": 0,
+            "regex": null
         },
         "property": {
-            "type": "number"
+            "options": [
+                {
+                    "label": "Can Read",
+                    "value": "R"
+                },
+                {
+                    "label": "Can Write",
+                    "value": "W"
+                },
+                {
+                    "label": "Both",
+                    "value": "B"
+                }
+            ]
         }
     },
     {
-        "controlName": "customControlId",
-        "label": "Custom Control",
-        "layoutStyleClass": "col-md-6 col-xs-12",
-        "type": "custom",
-        "validation": {
-            "required": true
-        }
-    },
-    {
-        "controlName": "details",
-        "label": "Details",
+        "controlName": "address",
+        "label": "Address",
         "type": "editor",
-        "layoutStyleClass": "col-md-12 col-xs-12"
-    },
-    {
-        "controlName": "placeholder",
-        "type": "placeholder",
         "layoutStyleClass": "col-md-12 col-xs-12"
     }
 ]
