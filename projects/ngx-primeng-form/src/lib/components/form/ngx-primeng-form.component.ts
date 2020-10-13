@@ -14,7 +14,7 @@ export class NgxPrimengFormComponent implements OnInit, AfterContentInit {
 
   // templates
   @ContentChildren(NgxFormTemplate) templates: QueryList<NgxFormTemplate>;
-  // form 
+  // form
   _forms: INgxPrimengForm[] = [];
   // instance of the froms
   @Input() form: FormGroup;
@@ -55,7 +55,7 @@ export class NgxPrimengFormComponent implements OnInit, AfterContentInit {
   }
 
   getControl(controlName: string): INgxPrimengForm {
-    return this._forms.find(m => m.controlName.toLowerCase() == controlName.toLowerCase());
+    return this._forms.find(m => m.controlName.toLowerCase() === controlName.toLowerCase());
   }
 
   getValidations(controlName: string): ValidatorFn[] {

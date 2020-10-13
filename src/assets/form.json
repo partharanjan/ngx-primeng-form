@@ -90,11 +90,11 @@
         "value": "",
         "validation": {
             "required": true,
-            "email":true,
+            "email": true,
             "maxLength": 50
         },
-        "property":{
-            "type":"email"
+        "property": {
+            "type": "email"
         }
     },
     {

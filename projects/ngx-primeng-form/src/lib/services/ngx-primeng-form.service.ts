@@ -15,7 +15,7 @@ import {
   NgxPrimengFormNumericProperty,
   NgxPrimengFormEditorProperty
 } from '../interfaces/ngx-primeng-form';
-import { FormGroup, FormControl, Validators, ValidatorFn, FormBuilder, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidatorFn, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
 
 @Injectable({
@@ -318,7 +318,7 @@ export class NgxPrimengFormService {
     return null;
   }
 
-  //create control
+  // create control
   createControls(formBuilder: FormBuilder, forms: INgxPrimengForm[]): FormGroup {
     // clear the form gropup
     const formGroup = formBuilder.group({});
@@ -359,7 +359,6 @@ export class NgxPrimengFormService {
             formGroup.addControl(form.controlName, new FormControl(form.value, validations));
           }
         }
-
       });
     }
   }
@@ -406,6 +405,38 @@ export class NgxPrimengFormService {
     if (property) {
       property.options = items;
     }
+  }
+
+  cloneAbstractControl<T extends AbstractControl>(control: T): T {
+    let newControl: T;
+
+    if (control instanceof FormGroup) {
+      const formGroup = new FormGroup({}, control.validator, control.asyncValidator);
+      const controls = control.controls;
+
+      Object.keys(controls).forEach(key => {
+        formGroup.addControl(key, this.cloneAbstractControl(controls[key]));
+      });
+
+      newControl = formGroup as any;
+    }
+    else if (control instanceof FormArray) {
+      const formArray = new FormArray([], control.validator, control.asyncValidator);
+
+      control.controls.forEach(formControl => formArray.push(this.cloneAbstractControl(formControl)))
+
+      newControl = formArray as any;
+    }
+    else if (control instanceof FormControl) {
+      newControl = new FormControl(control.value, control.validator, control.asyncValidator) as any;
+    }
+    else {
+      throw new Error('Error: unexpected control value');
+    }
+
+    if (control.disabled) { newControl.disable({ emitEvent: false }); }
+
+    return newControl;
   }
 
 }
