@@ -1,0 +1,112 @@
+<div class="container-fluid">
+    <form [formGroup]="form">
+        <div class="row mt-3 mb-3">
+            <div class="col-3">
+                <h3>Workflow Engine</h3>
+            </div>
+            <div class="col">
+                <input type="text" formControlName="formName" class="form-control" placeholder="Form Name">
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-3 col-xs-12">
+
+                <div class="card">
+                    <div class="card-header"><strong>{{form.controls['formName'].value }} Stages</strong> </div>
+                    <ul class="list-group">
+                        <ng-container *ngFor="let stageFormGroup of stageForms.controls;let stageIndex=index">
+                            <ng-container [formGroup]="stageFormGroup">
+                                <li class="list-group-item stage-item"
+                                    [ngClass]="{'active': (activeStageIndex+1)==stageFormGroup.controls['info'].controls['stageNumber'].value}"
+                                    (click)="handleStageClick(stageIndex)">
+                                    <div>
+                                        <strong
+                                            class="d-block">{{stageFormGroup.controls['info'].controls['stageName'].value}}</strong>
+                                        <em>Stage#
+                                            {{stageFormGroup.controls['info'].controls['stageNumber'].value}}</em>
+                                        <div *ngIf="stageFormGroup.controls['info'].controls['reworkTo'].value">
+                                            <span class="rework-stage"><i class="pi pi-arrow-up"></i> Rework To Stage#
+                                                {{stageFormGroup.controls['info'].controls['reworkTo'].value}}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ng-container>
+
+
+                        </ng-container>
+                    </ul>
+
+
+                    <div class="mt-2 mb-2 text-center">
+                        <div>
+                            <button type="button" class="btn btn-primary btn-sm" (click)="handleAddStage()">+ Add
+                                Stage</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 col-xs-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Stage Config</strong>
+                        <span class="float-right">
+                            <a href="javascript:void(0)" (click)="showCode()">Code</a> |
+                            <a href="javascript:void(0)" (click)="preview()">Preview</a>
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <ng-container *ngIf="activeStageIndex>-1">
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item" *ngFor="let tab of tabs">
+                                    <a class="nav-link" [ngClass]="{'active': tab.key===activeTab}"
+                                        href="javascript:void(0)" (click)="activeTab=tab.key">{{tab.value}}</a>
+                                </li>
+                            </ul>
+
+                            <div class="mt-3">
+
+                                <ng-container [ngSwitch]="activeTab">
+                                    <!--Basic Info-->
+                                    <ng-container *ngSwitchCase="'info'">
+                                        <ngx-primeng-form [form]="getActiveStageFormGroup('info')"
+                                            [items]="stageInfoFormItems">
+                                        </ngx-primeng-form>
+
+                                        <div class="text-right">
+                                            <button type="button" class="btn btn-sm btn-primary mr-2"
+                                                (click)="activeTab='checklist'">Continue</button>
+                                            <button type="button" class="btn btn-sm btn-danger"
+                                                (click)="handleDelete()">Delete</button>
+                                        </div>
+                                    </ng-container>
+                                    <!--Checklist-->
+                                    <ng-container *ngSwitchCase="'checklist'">
+                                        <app-check-list [form]="getActiveStageFormGroup('checklist')">
+                                        </app-check-list>
+                                        <div class="text-right mt-2">
+                                            <button type="button" class="btn btn-sm btn-primary mr-2"
+                                                (click)="activeTab='form'">Continue</button>
+                                        </div>
+
+                                    </ng-container>
+                                    <!--Form-->
+                                    <ng-container *ngSwitchCase="'form'">
+                                        <app-stage-form [control]="getActiveStageFormGroup('form')"></app-stage-form>
+                                    </ng-container>
+
+                                </ng-container>
+
+                            </div>
+
+                        </ng-container>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>

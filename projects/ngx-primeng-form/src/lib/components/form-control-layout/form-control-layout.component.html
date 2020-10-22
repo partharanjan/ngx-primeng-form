@@ -10,6 +10,9 @@
         <span class="float-right" *ngIf="addOptionLabel">
             <a href="javascript:void(0)" class="label-add-option" (click)="handleOnAdd()">{{addOptionLabel}}</a>
         </span>
+        <!--Right content-->
+        <ng-content select="[rightContent]"></ng-content>
+        
     </label>
     <!--Content-->
     <ng-content></ng-content>

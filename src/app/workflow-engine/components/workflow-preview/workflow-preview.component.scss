@@ -1,0 +1,258 @@
+$btn-lightgreen: #7ebb45;
+$btn-lightgrey: #888888;
+$btn-darkgreen: #00a657;
+$btn-grey: #707070;
+
+.stepper {
+    border-bottom: 0 !important;
+
+    .steps.complete {
+        .progress {
+            .stage-no {
+                color: $btn-lightgreen;
+            }
+
+            .stage-name {
+                color: $btn-lightgreen;
+            }
+        }
+    }
+
+    .steps.active {
+        border-bottom: 1px solid $btn-darkgreen;
+
+        .progress {
+            .stage-no {
+                color: #000000;
+            }
+
+            .stage-name {
+                color: $btn-darkgreen;
+            }
+        }
+    }
+
+    .steps {
+        padding: 0;
+        position: relative;
+
+        .progress {
+            position: relative;
+            border-radius: 0px;
+            box-shadow: none;
+            height: 50px;
+            overflow: visible !important;
+
+            .stage-no {
+                font-size: 10px;
+                font-weight: bold;
+                color: $btn-lightgrey;
+                text-transform: uppercase;
+                position: relative;
+                left: 38px;
+                top: 8px;
+                width: 60px;
+            }
+
+            .stage-name {
+                color: $btn-lightgrey;
+                font-size: 10px;
+                font-weight: bold;
+                text-transform: uppercase;
+                position: relative;
+                top: 20px;
+                margin-right: 25px;
+                right: 22px;
+            }
+
+            .stage-next {
+                position: relative;
+                top: 15px;
+                left: auto;
+                opacity: 0.5;
+                color: $btn-grey;
+
+                i {
+                    float: right;
+                }
+            }
+        }
+
+        .stage-action.complete {
+            background-color: $btn-lightgreen;
+
+            i {
+                color: #fff;
+                font-size: 18px;
+                margin: 6px;
+            }
+        }
+
+        .stage-action.active {
+            background-color: #fff;
+            border: 1px solid $btn-darkgreen;
+
+            i {
+                color: $btn-darkgreen;
+                font-size: 18px;
+                margin: 6px;
+            }
+        }
+
+        .stage-action {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            display: block;
+            background: $btn-lightgrey;
+            top: 15%;
+            border-radius: 50%;
+            left: 0;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .stage-mobile {
+        font-size: 9px !important;
+        padding-left: 10px;
+    }
+    .workflow-stages {
+        margin: 40px -20px 40px -70px !important;
+    }
+}
+
+
+.workflow-stages {
+    margin: 40px -20px 40px -20px;
+
+    ul {
+        display: flex;
+        position: relative;
+
+        &:after {
+            height: 1px;
+            content: "";
+            position: absolute;
+            left: 10%;
+            top: 39%;
+            right: 70px;
+        }
+    }
+
+    li {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        flex: 1;
+
+        .stage-cnt {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stage-status,
+        .stage-author,
+        .stage-date {
+            font-size: 14px;
+            text-align: center;
+            text-transform: uppercase;
+            color: #858383;
+        }
+
+        .stage-status {
+            font-weight: 700;
+            display: flex;
+            align-items: flex-end;
+            min-height: 40px;
+        }
+
+
+
+        .stage-date {
+            font-size: 12px;
+            color: #3E3C3C;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        .stage-count {
+            width: 28px;
+            height: 28px;
+            background: #50C14E;
+            border-radius: 50%;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            margin: 8px 0;
+            cursor: default;
+        }
+
+        .stage-info {
+            span {
+                display: block;
+            }
+
+            .owner {
+                font-weight: 700;
+                font-size: 10px;
+            }
+
+            .owner,
+            .action-date {
+                margin-bottom: 0;
+            }
+        }
+
+        .active {
+            background: #5093e1;
+        }
+
+        .completed {
+            background: #00684d;
+        }
+
+        .pending {
+            background: #bbbbbb;
+        }
+
+        .overdue {
+            background: #ca0505;
+        }
+
+        .overdue-warning {
+            background: orange;
+        }
+
+
+        .progress {
+            position: relative;
+            border-radius: 0px;
+            box-shadow: none;
+            margin: 0px 0;
+            background: #000;
+            height: 1px;
+            top: 62px;
+            width: 100%;
+        }
+
+        &:first-child {
+            .progress {
+                left: 50%;
+                width: 100%;
+            }
+
+        }
+
+        &:last-child {
+            .progress {
+                width: 50%;
+                right: 26%
+            }
+        }
+    }
+}

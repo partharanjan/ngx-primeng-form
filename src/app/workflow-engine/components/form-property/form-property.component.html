@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-12">
+        <div style="max-height: 250px;overflow-x: hidden;padding: 5px;">
+            <ngx-primeng-form [form]="form" [items]="attributes">
+
+                <ng-template formTemplate="custom" let-control="control">
+                    <ng-container *ngIf="control.controlName==='validation'">
+                        <div class="row" [formGroup]="form.controls['validation']">
+                            <div class="col-md-12">
+                                <p-checkbox [formControl]="getValidationRequiredControl()"
+                                    [binary]="true" label="Required"></p-checkbox>
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <div class="form-group">
+                                    <label>Min. Length</label>
+                                    <input class="form-control" formControlName="minLength">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Max. Length</label>
+                                <input class="form-control" formControlName="maxLength">
+                            </div>
+                            <div class="col-md-12">
+                                <label>Regex</label>
+                                <input class="form-control" formControlName="regex">
+                            </div>
+                        </div>
+                    </ng-container>
+                </ng-template>
+
+            </ngx-primeng-form>
+        </div>
+
+    </div>
+    <div class="col-12 mt-3 text-right">
+        <button class="btn btn-sm btn-primary mr-2" (click)="handleUpdate()">Update</button>
+        <button class="btn btn-sm btn-danger" (click)="handleCancel()">Cancel</button>
+    </div>
+</div>

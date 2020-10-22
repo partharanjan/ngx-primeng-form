@@ -1,0 +1,134 @@
+[
+    {
+        "controlName": "stageName",
+        "id": "stageName",
+        "label": "Stage Name",
+        "type": "text",
+        "controlStyleClass": "form-control",
+        "layoutStyleClass": "col-md-6 col-xs-12",
+        "value": "",
+        "validation": {
+            "required": true,
+            "maxLength": 100
+        }
+    },
+    {
+        "controlName": "stageNumber",
+        "id": "stageNumber",
+        "label": "Stage#",
+        "type": "text",
+        "controlStyleClass": "form-control",
+        "layoutStyleClass": "col-md-6 col-xs-12",
+        "placeholder": "Enter Last Name",
+        "value": "",
+        "validation": {
+            "required": true,
+            "maxLength": 100
+        }
+    },
+    {
+        "controlName": "access",
+        "label": "User Access",
+        "type": "multiselect",
+        "controlStyleClass": "d-block",
+        "layoutStyleClass": "col-md-6 col-xs-12",
+        "validation": {
+            "required": true
+        },
+        "property": {
+            "options": [
+                {
+                    "label": "PM",
+                    "value": "PM"
+                },
+                {
+                    "label": "APM",
+                    "value": "APM"
+                },
+                {
+                    "label": "GPC AR & LM",
+                    "value": "GPC AR & LM"
+                },
+                {
+                    "label": "GPC QC AR & LM",
+                    "value": "GPC QC AR & LM"
+                },
+                {
+                    "label": "REAS AR & LM",
+                    "value": "REAS AR & LM"
+                }
+            ],
+            "maxSelectedLabels": 15
+        }
+    },
+    {
+        "controlName": "actions",
+        "label": "User Actions",
+        "type": "multiselect",
+        "controlStyleClass": "d-block",
+        "layoutStyleClass": "col-md-6 col-xs-12",
+        "validation": {
+            "required": true
+        },
+        "property": {
+            "options": [
+                {
+                    "label": "Submit",
+                    "value": "Submit"
+                },
+                {
+                    "label": "Save As Draft",
+                    "value": "Save As Draft"
+                },
+                {
+                    "label": "Approve",
+                    "value": "Approve"
+                },
+                {
+                    "label": "Reject",
+                    "value": "Reject"
+                },
+                {
+                    "label": "Cancel",
+                    "value": "Cancel"
+                },
+                {
+                    "label": "Rework",
+                    "value": "Rework"
+                }
+            ],
+            "maxSelectedLabels": 15
+        }
+    },
+    {
+        "controlName": "reworkTo",
+        "label": "Rework To",
+        "type": "select",
+        "controlStyleClass": "form-control",
+        "layoutStyleClass": "col-md-6 col-xs-12",
+        "validation": {},
+        "property": {}
+    },
+    {
+        "controlName": "tat",
+        "label": "TAT",
+        "type": "text",
+        "controlStyleClass": "form-control",
+        "layoutStyleClass": "col-md-6 col-xs-12",
+        "validation": {
+            "required": true
+        },
+        "property": {}
+    },
+    {
+        "controlName": "samplingPercentage",
+        "label": "Sampling (%)",
+        "type": "text",
+        "controlStyleClass": "form-control",
+        "layoutStyleClass": "col-md-6 col-xs-12",
+        "validation": {
+            "required": true
+        },
+        "property": {}
+    }
+]

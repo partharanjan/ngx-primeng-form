@@ -1,0 +1,73 @@
+<strong>{{code?.formName}}</strong>
+
+<div class="container">
+    <div class="workflow-stages">
+        <ul>
+            <li *ngFor="let item of stages;let itemIndex=index">
+                <div class="progress"></div>
+                <div class="stage-cnt">
+                    <div class="stage-status stage-mobile">{{item.info.stageName}}</div>
+                    <div class="stage-count " [ngClass]="{'pending': itemIndex>0,'active': itemIndex==0}">
+                        {{item.info.stageNumber}}</div>
+                </div>
+                <div class="stage-info">
+                    <span class="owner">{{item.info.access}}</span>
+                </div>
+
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <ngx-primeng-form [form]="form" [items]="formItems">
+
+            </ngx-primeng-form>
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-header">
+            Attach Documents
+        </div>
+        <div class="card-body">
+            <span>
+                *File extensions allowed ( png, xlsm, pptx, txt, dwg, xlsx, htm, html, xls, jpg, msg, docx, doc, xls,
+                zip, csv, pdf, tif ) <br />
+                *Each file shoud not exceed 20 MB
+
+                <div class="mt-2">
+                    <button class="btn btn-primary btn-sm mr-2">Upload</button> <button class="btn btn-primary btn-sm"
+                        disabled>Cancel</button>
+                </div>
+
+
+            </span>
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-header">
+            Comments
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <textarea placeholder="Add a comment. Use @ to mention a person and send a notification"
+                        class="form-control" style="height: 250px;"></textarea>
+                </div>
+                <div class="col-md-6"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <ng-container *ngFor="let action of activeStage?.info?.actions">
+            <button class="btn btn-sm btn-primary mr-2">{{action}}</button>
+        </ng-container>
+        
+    </div>
+
+</div>

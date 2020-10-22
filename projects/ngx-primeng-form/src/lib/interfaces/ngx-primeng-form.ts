@@ -51,6 +51,12 @@ export interface INgxPrimengFormValidation {
 
 // form property
 export class NgxPrimengFormProperty {
+    // append to default is body
+    appendTo: string = 'body';
+    // add option label
+    addOptionLabel: string = null;
+    // help text
+    helpText: string = null;
     // on select or value changed
     onChange($event: any) { }
     // on focus out
@@ -58,13 +64,7 @@ export class NgxPrimengFormProperty {
     // on focus in
     onFocus($event: any) { }
     // on option clicked
-    onAddOption() { };
-    // append to default is body
-    appendTo: string = 'body';
-    // add option label
-    addOptionLabel: string = null;
-    // help text
-    helpText: string = null;
+    onAddOption() { }
 }
 
 // for text box

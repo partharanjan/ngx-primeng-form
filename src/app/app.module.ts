@@ -4,9 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxPrimengFormModule } from 'projects/ngx-primeng-form/src/public-api';
 import { CheckboxModule } from 'primeng/checkbox';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -14,12 +13,10 @@ import { CheckboxModule } from 'primeng/checkbox';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgxPrimengFormModule,
+    BrowserAnimationsModule,
     CheckboxModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

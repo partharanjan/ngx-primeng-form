@@ -2,7 +2,7 @@
 
     <!--From Configuration-->
     <ng-container [formGroup]="form">
-        <ng-container *ngFor="let obj of _forms;trackBy:trackByControlName">
+        <ng-container *ngFor="let obj of _forms;trackBy:trackByControlName;let formControlIndex=index">
 
             <div class="{{obj.layoutStyleClass}}">
 
@@ -10,7 +10,8 @@
 
                     <!--Placeholder control-->
                     <ng-container *ngSwitchCase="'placeholder'">
-                        <ng-container *ngTemplateOutlet="placeholderTemplate;context:{control:obj}">
+                        <ng-container
+                            *ngTemplateOutlet="placeholderTemplate;context:{control:obj,controlIndex:formControlIndex}">
                         </ng-container>
                     </ng-container>
 
@@ -20,6 +21,15 @@
                         <ngx-form-control-layout [label]="obj.label" [form]="form" [control]="obj.controlName"
                             [helpText]="obj.property.helpText" [addOptionLabel]="obj.property.addOptionLabel"
                             (onAddOption)="obj.property.onAddOption()">
+
+                            <!--Right content-->
+
+                            <ng-container rightContent>
+                                <ng-container
+                                    *ngTemplateOutlet="formControlTemplate;context:{control:obj,controlIndex:formControlIndex}">
+                                </ng-container>
+                            </ng-container>
+
 
                             <ng-container [ngSwitch]="obj.type">
 

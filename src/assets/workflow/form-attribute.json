@@ -1,0 +1,72 @@
+[
+    {
+        "controlName": "fieldName",
+        "id": "fieldName",
+        "label": "Field Name",
+        "type": "text",
+        "controlStyleClass": "form-control",
+        "layoutStyleClass": "col-md-12 col-xs-12",
+        "value": "",
+        "validation": {
+            "required": true,
+            "maxLength": 100
+        }
+    },
+    {
+        "controlName": "layoutStyle",
+        "id": "layoutStyle",
+        "label": "Layout Style",
+        "type": "select",
+        "controlStyleClass": "form-control",
+        "layoutStyleClass": "col-md-12 col-xs-12",
+        "placeholder": "",
+        "value": "",
+        "validation": {
+            "required": true
+        },
+        "property": {
+            "options": [
+                {
+                    "label": "Full",
+                    "value": "col-md-12 col-xs-12"
+                },
+                {
+                    "label": "Half",
+                    "value": "col-md-6 col-xs-12"
+                },
+                {
+                    "label": "One 3rd",
+                    "value": "col-md-4 col-xs-12"
+                },
+                {
+                    "label": "One 4th",
+                    "value": "col-md-3 col-xs-12"
+                }
+            ]
+        }
+    },
+    {
+        "controlName": "placeholder",
+        "label": "Placeholder",
+        "type": "text",
+        "controlStyleClass": "form-control",
+        "layoutStyleClass": "col-md-12 col-xs-12"
+    },
+    {
+        "controlName": "value",
+        "label": "Default Value",
+        "type": "text",
+        "controlStyleClass": "form-control",
+        "layoutStyleClass": "col-md-12 col-xs-12"
+    },
+    {
+        "controlName": "validation",
+        "label": "Validation",
+        "type": "custom",
+        "controlStyleClass": "form-control",
+        "layoutStyleClass": "col-md-12 col-xs-12",
+        "property": {
+            "controlType": "group"
+        }
+    }
+]

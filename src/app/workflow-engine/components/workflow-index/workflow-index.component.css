@@ -1,0 +1,9 @@
+.stage-item {
+    cursor: pointer;
+}
+
+.rework-stage {
+    color: red;
+    font-style: italic;
+    font-size: 12px;
+}

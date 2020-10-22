@@ -30,6 +30,8 @@ export class NgxPrimengFormComponent implements OnInit, AfterContentInit {
   customControlTemplate: TemplateRef<any>;
   // placeholder template
   placeholderTemplate: TemplateRef<any>;
+  // form control template
+  formControlTemplate: TemplateRef<any>;
 
   constructor(private service: NgxPrimengFormService) { }
 
@@ -44,6 +46,9 @@ export class NgxPrimengFormComponent implements OnInit, AfterContentInit {
           } break;
           case 'placeholder': {
             this.placeholderTemplate = item.template;
+          } break;
+          case 'formcontrol': {
+            this.formControlTemplate = item.template;
           } break;
         }
       });

@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col-8">
+        <div class="field-container" pDroppable="field" (onDrop)="handleDrop($event)">
+            <ngx-primeng-form [form]="dynamicFormGroup" [items]="formItems">
+                <!--form control-->
+                <ng-template formTemplate="formcontrol" let-control="control" let-controlIndex="controlIndex">
+                    <span class="float-right">
+                        <a href="javascript:void(0)" (click)="handleConfig(controlIndex)"><i class="pi pi-cog"></i></a>
+                        <a href="javascript:void(0)" (click)="btnDelete(controlIndex)" class="text-danger"><i
+                                class="pi pi-trash"></i></a>
+                    </span>
+                </ng-template>
+
+            </ngx-primeng-form>
+        </div>
+    </div>
+    <div class="col-4">
+
+        <p-accordion>
+
+            <ng-container *ngIf="editableIndex>-1">
+                <p-accordionTab header="Field Property" [selected]="true">
+                    <app-form-property [attributes]="formAttributes" [instance]="formItems[editableIndex]"
+                        (onUpdate)="handleUpdate($event)" (onCancel)="handleCancel()">
+                    </app-form-property>
+                </p-accordionTab>
+            </ng-container>
+
+            <p-accordionTab header="System Fields">
+
+                <ng-container *ngFor="let field of systemFields">
+                    <div class="field" pDraggable="field" (onDragStart)="onDragStart(field,$event)">
+                        <span>{{field.name}}</span>
+                    </div>
+                </ng-container>
+
+            </p-accordionTab>
+
+            <p-accordionTab header="Custom Fields">
+
+                <ng-container *ngFor="let field of customFields">
+                    <div class="field" pDraggable="field" (onDragStart)="onDragStart(field,$event)">
+                        <span>{{field.name}}</span>
+                    </div>
+                </ng-container>
+
+            </p-accordionTab>
+
+
+
+        </p-accordion>
+
+    </div>
+</div>
