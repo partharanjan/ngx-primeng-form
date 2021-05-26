@@ -88,6 +88,8 @@ export class NgxPrimengFormNumberProperty extends NgxPrimengFormProperty {
     fraction: number = 2;
     min: number = null;
     max: number = null;
+    prefix: string = null;
+    suffix: string = null;
 }
 
 // select property

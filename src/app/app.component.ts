@@ -34,6 +34,8 @@ export class AppComponent implements OnInit {
       this.formItems = this.service.jsonToForm(forms);
       this.service.prepareControl(this.form, this.formItems);
       this.form.controls['dob'].setValue('24-07-2020');
+
+      console.log(this.formItems);
     });
   }
 

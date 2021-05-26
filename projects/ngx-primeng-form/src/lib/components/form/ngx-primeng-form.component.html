@@ -1,7 +1,8 @@
-<div class="row">
+<div class="{{layoutStyle}}">
 
     <!--From Configuration-->
     <ng-container [formGroup]="form">
+
         <ng-container *ngFor="let obj of _forms;trackBy:trackByControlName">
 
             <div class="{{obj.layoutStyle}}">
@@ -16,12 +17,19 @@
 
                     <!--Checkbox-->
                     <ng-container *ngSwitchCase="'checkbox'">
+                        <!--Top Content-->
+                        <ng-container *ngTemplateOutlet="topContentTemplate;context:{control:obj}">
+                        </ng-container>
+                        <!--Content-->
                         <div class="{{obj.property.containerStyle}}">
                             <p-checkbox [formControl]="form.controls[obj.controlName]" [label]="obj.label"
                                 [binary]="true" [name]="obj.id" [inputId]="obj.id"
                                 (onChange)="obj.property.onChange($event)">
                             </p-checkbox>
                         </div>
+                        <!--Footer Content-->
+                        <ng-container *ngTemplateOutlet="bottomContentTemplate;context:{control:obj}">
+                        </ng-container>
                     </ng-container>
 
                     <!--Other control-->
@@ -32,10 +40,18 @@
 
                             <!--right Content-->
                             <ng-container rightContent>
+                                <!--Add Option-->
                                 <ng-container *ngIf="obj.property.addOptionLabel">
                                     <a href="javascript:void(0)" class="add-option-label-link"
                                         (click)="obj.property.onAddOption()">{{obj.property.addOptionLabel}}</a>
                                 </ng-container>
+
+                                <!--Custom add option-->
+                                <ng-container *ngIf="!obj.property.addOptionLabel">
+                                    <ng-container *ngTemplateOutlet="topContentTemplate;context:{control:obj}">
+                                    </ng-container>
+                                </ng-container>
+
                             </ng-container>
 
                             <!--Content-->
@@ -57,10 +73,11 @@
                                         (onBlur)="obj.property.onBlur($event)" (onFocus)="obj.property.onFocus($event)"
                                         (onInput)="obj.property.onChange($event)" [placeholder]="obj.placeholder"
                                         [currency]="obj.property.currency" [locale]="obj.property.locale"
-                                        [useGrouping]="obj.property.grouping"
+                                        currencyDisplay="code" [useGrouping]="obj.property.grouping"
                                         [minFractionDigits]="obj.property.fraction"
                                         [maxFractionDigits]="obj.property.fraction" [min]="obj.property.min"
-                                        [max]="obj.property.max">
+                                        [max]="obj.property.max" [suffix]="obj.property.suffix"
+                                        [prefix]="obj.property.prefix">
                                     </p-inputNumber>
                                 </ng-container>
 
@@ -188,18 +205,21 @@
 
                             </ng-container>
 
-                            <!--Bottom Content-->
+                            <!--Footer Content-->
                             <ng-container bottomContent>
-                                
+                                <ng-container *ngTemplateOutlet="bottomContentTemplate;context:{control:obj}">
+                                </ng-container>
                             </ng-container>
 
                         </ngx-form-control-layout>
                     </ng-container>
 
                 </ng-container>
+
             </div>
 
         </ng-container>
+
     </ng-container>
 
     <!--Inside content of form-->

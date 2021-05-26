@@ -12,6 +12,17 @@
             {{control|json}}
         </ng-template>
 
+        <!--Top Content-->
+        <ng-template formTemplate="topContent" let-control="control">
+            <span>Top Content</span>
+        </ng-template>
+        
+
+        <!--Bottom Content-->
+        <ng-template formTemplate="bottomContent" let-control="control">
+            <span>Bottom Content</span>
+        </ng-template>
+
     </ngx-primeng-form>
 
     <button type="button" (click)="submit()">Submit</button>

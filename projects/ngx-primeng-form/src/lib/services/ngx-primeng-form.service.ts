@@ -87,6 +87,22 @@ export class NgxPrimengFormService {
     this.setProperty(model, 'helpText', property);
   }
 
+  // set additional property
+  private setAdditionalProperty(model: any, property: any) {
+    // append to
+    // get current property of the models
+    const allExistingProperties = Object.keys(model);
+    const givenProperties = Object.keys(property);
+    if (givenProperties && givenProperties.length > 0) {
+      givenProperties.forEach(propertyId => {
+        if (allExistingProperties.indexOf(property) == -1) {
+          // set property
+          model[propertyId] = property[propertyId];
+        }
+      });
+    }
+  }
+
   // get textbox property
   private getTextProperty(property: any): NgxPrimengFormTextProperty {
     // create model
@@ -100,6 +116,7 @@ export class NgxPrimengFormService {
       // for readonly
       this.setProperty(model, 'readonly', property, false);
       // set additional property
+      this.setAdditionalProperty(model,property);
     }
     return model;
   }
@@ -125,6 +142,12 @@ export class NgxPrimengFormService {
       this.setProperty(model, 'min', property, false);
       // for max
       this.setProperty(model, 'max', property, false);
+      // for max
+      this.setProperty(model, 'prefix', property, false);
+      // for max
+      this.setProperty(model, 'suffix', property, false);
+      // set additional property
+      this.setAdditionalProperty(model,property);
     }
     return model;
   }
@@ -145,6 +168,8 @@ export class NgxPrimengFormService {
       this.setProperty(model, 'maxSelectedLabels', property);
       // show clear
       this.setProperty(model, 'showClear', property, false);
+      // set additional property
+      this.setAdditionalProperty(model,property);
     }
     return model;
   }
@@ -161,6 +186,8 @@ export class NgxPrimengFormService {
       this.setProperty(model, 'minLength', property);
       // for options
       this.setProperty(model, 'forceSelection', property, false);
+      // set additional property
+      this.setAdditionalProperty(model,property);
     }
     return model;
   }
@@ -181,6 +208,8 @@ export class NgxPrimengFormService {
       this.setProperty(model, 'view', property);
       // for time format
       this.setProperty(model, 'timeFormat', property);
+      // set additional property
+      this.setAdditionalProperty(model,property);
     }
     return model;
   }
@@ -197,6 +226,8 @@ export class NgxPrimengFormService {
       this.setProperty(model, 'label', property);
       // for format
       this.setProperty(model, 'containerStyle', property);
+      // set additional property
+      this.setAdditionalProperty(model,property);
     }
     return model;
   }
@@ -213,6 +244,8 @@ export class NgxPrimengFormService {
       this.setProperty(model, 'options', property);
       // for format
       this.setProperty(model, 'containerStyle', property);
+      // set additional property
+      this.setAdditionalProperty(model,property);
     }
     return model;
   }
@@ -229,6 +262,8 @@ export class NgxPrimengFormService {
       this.setProperty(model, 'controlType', property);
       // for field Type
       this.setProperty(model, 'fieldType', property);
+      // set additional property
+      this.setAdditionalProperty(model,property);
     }
     return model;
   }
@@ -247,6 +282,8 @@ export class NgxPrimengFormService {
       this.setProperty(model, 'modules', property);
       // for readonly
       this.setProperty(model, 'readonly', property, false);
+      // set additional property
+      this.setAdditionalProperty(model,property);
     }
     return model;
   }
@@ -259,6 +296,8 @@ export class NgxPrimengFormService {
     if (property) {
       // shared property
       this.setSharedProperty(model, property);
+      // set additional property
+      this.setAdditionalProperty(model,property);
     }
     return model;
   }

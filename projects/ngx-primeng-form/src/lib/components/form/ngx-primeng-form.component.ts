@@ -14,10 +14,16 @@ export class NgxPrimengFormComponent implements OnInit, AfterContentInit {
 
   // templates
   @ContentChildren(NgxFormTemplate) templates: QueryList<NgxFormTemplate>;
+
   // form 
   _forms: INgxPrimengForm[] = [];
+
   // instance of the froms
   @Input() form: FormGroup;
+
+  // layout style
+  layoutStyle: string = 'row';
+
   // items of control
   @Input()
   set items(values: INgxPrimengForm[]) {
@@ -30,6 +36,10 @@ export class NgxPrimengFormComponent implements OnInit, AfterContentInit {
   customControlTemplate: TemplateRef<any>;
   // placeholder template
   placeholderTemplate: TemplateRef<any>;
+  // top content template
+  topContentTemplate: TemplateRef<any>;
+  // bottom content template
+  bottomContentTemplate: TemplateRef<any>;
 
   constructor(private service: NgxPrimengFormService) { }
 
@@ -44,6 +54,12 @@ export class NgxPrimengFormComponent implements OnInit, AfterContentInit {
           } break;
           case 'placeholder': {
             this.placeholderTemplate = item.template;
+          } break;
+          case 'topContent': {
+            this.topContentTemplate = item.template;
+          } break;
+          case 'bottomContent': {
+            this.bottomContentTemplate = item.template;
           } break;
         }
       });
