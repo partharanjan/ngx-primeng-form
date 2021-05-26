@@ -4,7 +4,7 @@
     <ng-container [formGroup]="form">
         <ng-container *ngFor="let obj of _forms;trackBy:trackByControlName">
 
-            <div class="{{obj.layoutStyleClass}}">
+            <div class="{{obj.layoutStyle}}">
 
                 <ng-container [ngSwitch]="obj.type">
 
@@ -14,27 +14,59 @@
                         </ng-container>
                     </ng-container>
 
+                    <!--Checkbox-->
+                    <ng-container *ngSwitchCase="'checkbox'">
+                        <div class="{{obj.property.containerStyle}}">
+                            <p-checkbox [formControl]="form.controls[obj.controlName]" [label]="obj.label"
+                                [binary]="true" [name]="obj.id" [inputId]="obj.id"
+                                (onChange)="obj.property.onChange($event)">
+                            </p-checkbox>
+                        </div>
+                    </ng-container>
+
                     <!--Other control-->
                     <ng-container *ngSwitchDefault>
 
                         <ngx-form-control-layout [label]="obj.label" [form]="form" [control]="obj.controlName"
-                            [helpText]="obj.property.helpText" [addOptionLabel]="obj.property.addOptionLabel"
-                            (onAddOption)="obj.property.onAddOption()">
+                            [helpText]="obj.property.helpText">
 
+                            <!--right Content-->
+                            <ng-container rightContent>
+                                <ng-container *ngIf="obj.property.addOptionLabel">
+                                    <a href="javascript:void(0)" class="add-option-label-link"
+                                        (click)="obj.property.onAddOption()">{{obj.property.addOptionLabel}}</a>
+                                </ng-container>
+                            </ng-container>
+
+                            <!--Content-->
                             <ng-container [ngSwitch]="obj.type">
 
                                 <!--Textbox-->
                                 <ng-container *ngSwitchCase="'text'">
-                                    <input type="{{obj.property.type}}" class="{{obj.controlStyleClass}}"
+                                    <input type="{{obj.property.type}}" class="{{obj.controlStyle}}"
                                         [formControlName]="obj.controlName" [name]="obj.id" [id]="obj.id"
                                         [placeholder]="obj.placeholder" (onChange)="obj.property.onChange($event)"
                                         (onBlur)="obj.property.onBlur($event)" (onFocus)="obj.property.onFocus($event)"
-                                        autocomplete="off" [readonly]="obj.property.readonly" />
+                                        autocomplete="off" [readonly]="obj.property.readonly" pInputText />
+                                </ng-container>
+
+                                <!--Numeric-->
+                                <ng-container *ngSwitchCase="'number'">
+                                    <p-inputNumber [formControlName]="obj.controlName" [mode]="obj.property.mode"
+                                        [styleClass]="obj.controlStyle" [name]="obj.id" [inputId]="obj.id"
+                                        (onBlur)="obj.property.onBlur($event)" (onFocus)="obj.property.onFocus($event)"
+                                        (onInput)="obj.property.onChange($event)" [placeholder]="obj.placeholder"
+                                        [currency]="obj.property.currency" [locale]="obj.property.locale"
+                                        [useGrouping]="obj.property.grouping"
+                                        [minFractionDigits]="obj.property.fraction"
+                                        [maxFractionDigits]="obj.property.fraction" [min]="obj.property.min"
+                                        [max]="obj.property.max">
+                                    </p-inputNumber>
                                 </ng-container>
 
                                 <!--Dropdown-->
                                 <ng-container *ngSwitchCase="'select'">
-                                    <p-dropdown [styleClass]="obj.controlStyleClass" [formControlName]="obj.controlName"
+                                    <p-dropdown [styleClass]="obj.controlStyle" [formControlName]="obj.controlName"
                                         [options]="obj.property.options" [placeholder]="obj.placeholder"
                                         [filter]="obj.property.filter" [autoDisplayFirst]="false"
                                         [showClear]="obj.property.showClear" (onChange)="obj.property.onChange($event)"
@@ -45,11 +77,11 @@
 
                                 <!--multiselect-->
                                 <ng-container *ngSwitchCase="'multiselect'">
-                                    <p-multiSelect [styleClass]="obj.controlStyleClass"
-                                        [formControlName]="obj.controlName" [options]="obj.property.options"
-                                        [filter]="obj.property.filter" (onChange)="obj.property.onChange($event)"
-                                        [name]="obj.id" [inputId]="obj.id" (onBlur)="obj.property.onBlur($event)"
-                                        (onFocus)="obj.property.onFocus($event)" [appendTo]="obj.property.appendTo"
+                                    <p-multiSelect [styleClass]="obj.controlStyle" [formControlName]="obj.controlName"
+                                        [options]="obj.property.options" [filter]="obj.property.filter"
+                                        (onChange)="obj.property.onChange($event)" [name]="obj.id" [inputId]="obj.id"
+                                        (onBlur)="obj.property.onBlur($event)" (onFocus)="obj.property.onFocus($event)"
+                                        [appendTo]="obj.property.appendTo"
                                         [maxSelectedLabels]="obj.property.maxSelectedLabels">
                                     </p-multiSelect>
                                 </ng-container>
@@ -57,7 +89,7 @@
                                 <!--Date Picker-->
                                 <ng-container *ngSwitchCase="'date'">
                                     <p-calendar [showIcon]="true" [formControlName]="obj.controlName"
-                                        [styleClass]="obj.controlStyleClass" [name]="obj.id" [inputId]="obj.id"
+                                        [styleClass]="obj.controlStyle" [name]="obj.id" [inputId]="obj.id"
                                         [defaultDate]="obj.property.defaultDate" [minDate]="obj.property.minDate"
                                         [maxDate]="obj.property.maxDate" [dateFormat]="obj.property.format"
                                         (onSelect)="obj.property.onChange($event)"
@@ -67,11 +99,37 @@
                                     </p-calendar>
                                 </ng-container>
 
+                                <!--Time Picker-->
+                                <ng-container *ngSwitchCase="'time'">
+                                    <p-calendar [showIcon]="true" [formControlName]="obj.controlName"
+                                        [styleClass]="obj.controlStyle" [name]="obj.id" [inputId]="obj.id"
+                                        [hourFormat]="obj.property.timeFormat"
+                                        (onSelect)="obj.property.onChange($event)"
+                                        (onInput)="obj.property.onChange($event)" (onBlur)="obj.property.onBlur($event)"
+                                        (onFocus)="obj.property.onFocus($event)" [appendTo]="obj.property.appendTo"
+                                        [showTime]="true" [timeOnly]="true" [dataType]="obj.property.type"
+                                        icon="pi pi-clock">
+                                    </p-calendar>
+                                </ng-container>
+
+                                <!--Date & Time Picker-->
+                                <ng-container *ngSwitchCase="'dateTime'">
+                                    <p-calendar [showIcon]="true" [formControlName]="obj.controlName"
+                                        [styleClass]="obj.controlStyle" [name]="obj.id" [inputId]="obj.id"
+                                        [defaultDate]="obj.property.defaultDate" [minDate]="obj.property.minDate"
+                                        [maxDate]="obj.property.maxDate" [dateFormat]="obj.property.format"
+                                        (onSelect)="obj.property.onChange($event)"
+                                        (onInput)="obj.property.onChange($event)" (onBlur)="obj.property.onBlur($event)"
+                                        (onFocus)="obj.property.onFocus($event)" [appendTo]="obj.property.appendTo"
+                                        [dataType]="obj.property.type" [view]="obj.property.view" [showTime]="true"
+                                        [hourFormat]="obj.property.timeFormat">
+                                    </p-calendar>
+                                </ng-container>
+
                                 <!--autocomplete-->
                                 <ng-container *ngSwitchCase="'autocomplete'">
-                                    <p-autoComplete [styleClass]="obj.controlStyleClass"
-                                        [formControlName]="obj.controlName" [name]="obj.id" [inputId]="obj.id"
-                                        [minLength]="obj.property.minLength"
+                                    <p-autoComplete [styleClass]="obj.controlStyle" [formControlName]="obj.controlName"
+                                        [name]="obj.id" [inputId]="obj.id" [minLength]="obj.property.minLength"
                                         [forceSelection]="obj.property.forceSelection"
                                         [suggestions]="obj.property.suggestions"
                                         (completeMethod)="obj.property.onSearch($event)"
@@ -81,22 +139,14 @@
                                     </p-autoComplete>
                                 </ng-container>
 
-                                <!--Checkbox-->
-                                <ng-container *ngSwitchCase="'checkbox'">
-                                    <div class="{{obj.property.containerStyleClass}}">
-                                        <p-checkbox [styleClass]="obj.controlStyleClass"
-                                            [formControl]="form.controls[obj.controlName]" [label]="obj.property.label"
-                                            [binary]="true" [name]="obj.id" [inputId]="obj.id"
-                                            (onChange)="obj.property.onChange($event)"></p-checkbox>
-                                    </div>
-                                </ng-container>
-
                                 <!--Radio-->
                                 <ng-container *ngSwitchCase="'radio'">
-                                    <div class="{{obj.property.containerStyleClass}}">
-                                        <ng-container *ngFor="let radioObj of obj.property.items;let radioIndex=index">
-                                            <p-radioButton [styleClass]="obj.controlStyleClass" labelStyleClass="mr-2"
-                                                [name]="obj.id" id="{{obj.id}}_{{radioIndex}}" [value]="radioObj.value"
+                                    <div class="{{obj.property.containerStyle}}">
+                                        <ng-container
+                                            *ngFor="let radioObj of obj.property.options;let radioIndex=index">
+                                            <p-radioButton [styleClass]="obj.controlStyle"
+                                                labelStyleClass="ngx-form-radio-item" [name]="obj.id"
+                                                id="{{obj.id}}_{{radioIndex}}" [value]="radioObj.value"
                                                 [label]="radioObj.label" [formControlName]="obj.controlName">
                                             </p-radioButton>
                                         </ng-container>
@@ -105,11 +155,11 @@
 
                                 <!--Textarea-->
                                 <ng-container *ngSwitchCase="'textarea'">
-                                    <textarea class="{{obj.controlStyleClass}}" [formControlName]="obj.controlName"
+                                    <textarea class="{{obj.controlStyle}}" [formControlName]="obj.controlName"
                                         [name]="obj.id" [id]="obj.id" [placeholder]="obj.placeholder" autocomplete="off"
                                         (onChange)="obj.property.onChange($event)"
                                         (onBlur)="obj.property.onBlur($event)" (onFocus)="obj.property.onFocus($event)"
-                                        [readonly]="obj.property.readonly"></textarea>
+                                        [readonly]="obj.property.readonly" pInputText></textarea>
                                 </ng-container>
 
                                 <!--Editor-->
@@ -138,6 +188,10 @@
 
                             </ng-container>
 
+                            <!--Bottom Content-->
+                            <ng-container bottomContent>
+                                
+                            </ng-container>
 
                         </ngx-form-control-layout>
                     </ng-container>

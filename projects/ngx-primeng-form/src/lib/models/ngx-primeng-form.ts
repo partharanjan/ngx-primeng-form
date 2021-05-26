@@ -1,18 +1,22 @@
 import { SelectItem } from 'primeng/api';
 import { FormGroup } from '@angular/forms';
 
+// form type
 export enum NgxPrimengFormType {
     text = 'text',
+    number = 'number',
     select = 'select',
     multiselect = 'multiselect',
     date = 'date',
+    time = 'time',
+    dateTime = 'dateTime',
     autocomplete = 'autocomplete',
     checkbox = 'checkbox',
     radio = "radio",
     textarea = 'textarea',
     custom = 'custom',
-    editor = 'editor',
-    placeholder = 'placeholder'
+    placeholder = 'placeholder',
+    editor = 'editor'
 }
 
 // primeng form model
@@ -26,9 +30,9 @@ export interface INgxPrimengForm {
     // control type
     type: NgxPrimengFormType;
     // control css
-    controlStyleClass: string;
+    controlStyle: string;
     // layout css
-    layoutStyleClass: string;
+    layoutStyle: string;
     // placeholder
     placeholder?: string;
     // default value
@@ -74,10 +78,16 @@ export class NgxPrimengFormTextProperty extends NgxPrimengFormProperty {
     readonly: boolean = false;
 }
 
-// for text box
-export class NgxPrimengFormNumericProperty extends NgxPrimengFormProperty {
-    // currency
-    currency: string = '';
+// for number box
+export class NgxPrimengFormNumberProperty extends NgxPrimengFormProperty {
+    // text type defualt is text
+    mode: string = 'decimal';
+    currency: string;
+    locale: string;
+    grouping: boolean = true;
+    fraction: number = 2;
+    min: number = null;
+    max: number = null;
 }
 
 // select property
@@ -94,8 +104,9 @@ export class NgxPrimengFormDateProperty extends NgxPrimengFormProperty {
     minDate: Date = null;
     maxDate: Date = null;
     format: string = 'dd-mm-yy';
-    type: string = 'date';
+    type: string = 'string';
     view: string = 'date';
+    timeFormat: string = "12";
 }
 
 // autocomplete property
@@ -108,20 +119,13 @@ export class NgxPrimengFormAutoCompleteProperty extends NgxPrimengFormProperty {
 
 // checkbox property
 export class NgxPrimengFormCheckboxProperty extends NgxPrimengFormProperty {
-    label: string;
-    containerStyleClass: string = 'mt-1';
+    containerStyle: string;
 }
 
 //radio property
 export class NgxPrimengFormRadioProperty extends NgxPrimengFormProperty {
-    items: SelectItem[] = [];
-    containerStyleClass: string;
-}
-
-// for custom property
-export class NgxPrimengFormCustomProperty extends NgxPrimengFormProperty {
-    controlType: string = 'control';
-    fieldType?: string;
+    options: SelectItem[] = [];
+    containerStyle: string;
 }
 
 // for editor
@@ -132,7 +136,13 @@ export class NgxPrimengFormEditorProperty extends NgxPrimengFormProperty {
     onInit(event: any) { }
 }
 
+// for custom property
+export class NgxPrimengFormCustomProperty extends NgxPrimengFormProperty {
+    controlType: string = 'control';
+    fieldType?: string;
+}
 
+// form result
 export interface INgxPrimengFormResult {
     formGroup: FormGroup;
     forms: INgxPrimengForm[];

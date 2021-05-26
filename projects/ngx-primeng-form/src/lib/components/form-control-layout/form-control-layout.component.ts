@@ -4,7 +4,7 @@ import { FormGroup, AbstractControl } from '@angular/forms';
 @Component({
   selector: 'ngx-form-control-layout',
   templateUrl: './form-control-layout.component.html',
-  styleUrls: []
+  styleUrls: ['./form-control-layout.component.css']
 })
 export class FormControlLayoutComponent implements OnInit {
 
@@ -14,21 +14,12 @@ export class FormControlLayoutComponent implements OnInit {
   @Input() form: FormGroup;
   // control name
   @Input() control: string;
-
-  // add option
-  @Input() addOptionLabel: string = null;
-  // on add option
-  @Output() onAddOption = new EventEmitter<void>();
   // hints text
   @Input() helpText: string = null;
 
   constructor() { }
 
   ngOnInit(): void {
-  }
-
-  handleOnAdd() {
-    this.onAddOption.emit();
   }
 
   get isRequired(): boolean {

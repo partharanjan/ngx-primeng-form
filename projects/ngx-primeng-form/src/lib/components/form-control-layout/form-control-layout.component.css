@@ -1,0 +1,12 @@
+.ngx-form-help-text {
+    cursor: pointer;
+    padding-left: 5px;
+}
+
+.ngx-form-right-content {
+    float: right;
+}
+
+.ngx-form-w-full {
+    width: 100%;
+}

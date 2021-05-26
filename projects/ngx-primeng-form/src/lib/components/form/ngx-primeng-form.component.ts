@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ContentChildren, QueryList, AfterContentInit, TemplateRef } from '@angular/core';
 import { FormGroup, ValidatorFn } from '@angular/forms';
-import { INgxPrimengForm, NgxPrimengFormProperty } from '../../interfaces/ngx-primeng-form';
+import { INgxPrimengForm, NgxPrimengFormProperty } from '../../models/ngx-primeng-form';
 import { SelectItem } from 'primeng/api';
 import { NgxPrimengFormService } from '../../services/ngx-primeng-form.service';
 import { NgxFormTemplate } from '../../directives/form-template';
@@ -8,7 +8,7 @@ import { NgxFormTemplate } from '../../directives/form-template';
 @Component({
   selector: 'ngx-primeng-form',
   templateUrl: './ngx-primeng-form.component.html',
-  styles: []
+  styleUrls: ['./ngx-primeng-form.component.css']
 })
 export class NgxPrimengFormComponent implements OnInit, AfterContentInit {
 

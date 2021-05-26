@@ -1,18 +1,20 @@
 <div class="form-group">
     <!--Label-->
-    <label class="w-100">{{label}}
+    <label class="ngx-form-w-full">{{label}}
         <!--For Required field validator-->
         <span class="text-danger label-required" *ngIf="isRequired">*</span>
         <!--For help text-->
-        <span *ngIf="helpText" class="pl-2 pointer" pTooltip="{{helpText}}" class="label-help-text"><i
+        <span *ngIf="helpText" class="ngx-form-help-text" pTooltip="{{helpText}}"><i
                 class="pi pi-info-circle"></i></span>
-        <!--For Add option-->
-        <span class="float-right" *ngIf="addOptionLabel">
-            <a href="javascript:void(0)" class="label-add-option" (click)="handleOnAdd()">{{addOptionLabel}}</a>
+        <!--For Right option-->
+        <span class="ngx-form-right-content">
+            <ng-content select="[rightContent]"></ng-content>
         </span>
     </label>
     <!--Content-->
     <ng-content></ng-content>
     <!--Validation-->
     <ngx-inline-form-validation [form]="form" [control]="control" [displayName]="label"></ngx-inline-form-validation>
+    <!--Footer Content-->
+    <ng-content select="[bottomContent]"></ng-content>
 </div>

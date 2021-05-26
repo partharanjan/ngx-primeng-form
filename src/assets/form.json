@@ -4,9 +4,9 @@
         "id": "firstName",
         "label": "First Name",
         "type": "text",
-        "controlStyleClass": "form-control",
-        "layoutStyleClass": "col-md-6 col-xs-12",
-        "placeholder": "Enter First Name",
+        "controlStyle": "w-100",
+        "layoutStyle": "col-md-6 col-xs-12",
+        "placeholder": "",
         "value": "",
         "validation": {
             "required": true,
@@ -23,26 +23,50 @@
         "id": "lastName",
         "label": "Last Name",
         "type": "text",
-        "controlStyleClass": "form-control",
-        "layoutStyleClass": "col-md-6 col-xs-12",
+        "controlStyle": "w-100",
+        "layoutStyle": "col-md-6 col-xs-12",
         "placeholder": "Enter Last Name",
         "value": "",
         "validation": {
-            "required": true,
-            "email": null,
-            "minLength": 0,
-            "maxLength": 500,
-            "min": 0,
-            "max": 0,
-            "regex": null
+            "required": true
         }
     },
     {
-        "controlName": "gender",
-        "label": "Gender",
+        "controlName": "gender1",
+        "label": "Gender 1",
         "type": "select",
-        "controlStyleClass": "form-control",
-        "layoutStyleClass": "col-md-6 col-xs-12",
+        "controlStyle": "w-100",
+        "layoutStyle": "col-md-6 col-xs-12",
+        "validation": {
+            "required": true
+        },
+        "property": {
+            "options": [
+                {
+                    "label": "Male",
+                    "value": "M"
+                },
+                {
+                    "label": "FeMale",
+                    "value": "F"
+                },
+                {
+                    "label": "Other",
+                    "value": "O"
+                }
+            ],
+            "filter": false,
+            "addOptionLabel": "+ Add More",
+            "helpText": "Other is for Trans-gender",
+            "showClear": true
+        }
+    },
+    {
+        "controlName": "gender2",
+        "label": "Gender 2",
+        "type": "multiselect",
+        "controlStyle": "w-100",
+        "layoutStyle": "col-md-6 col-xs-12",
         "validation": {
             "required": true,
             "email": null,
@@ -67,17 +91,15 @@
                     "value": "O"
                 }
             ],
-            "filter": false,
-            "addOptionLabel": "+ Add More",
-            "helpText": "Other is for Trans-gender",
-            "showClear": true
+            "filter": true
         }
     },
     {
         "controlName": "dob",
         "label": "DOB",
         "type": "date",
-        "layoutStyleClass": "col-md-6 col-xs-12",
+        "controlStyle": "w-100",
+        "layoutStyle": "col-md-6 col-xs-12",
         "validation": {
             "required": true,
             "email": null,
@@ -93,48 +115,110 @@
         }
     },
     {
-        "controlName": "votingTime",
-        "label": "Voting Time",
+        "controlName": "dobTime",
+        "label": "DOB Time",
         "type": "time",
-        "controlStyleClass": "form-control",
-        "layoutStyleClass": "col-md-6 col-xs-12",
-        "validation": {
-            "required": true
-        }
-    },
-    {
-        "controlName": "visitTime",
-        "label": "Visit Time",
-        "type": "time",
-        "controlStyleClass": "form-control",
-        "layoutStyleClass": "col-md-6 col-xs-12",
-        "value": "10:00 AM",
+        "controlStyle": "w-100",
+        "layoutStyle": "col-md-6 col-xs-12",
         "validation": {
             "required": true
         },
         "property": {
-            "gap": 15
+            "timeFormat": "12",
+            "type": "string"
+        }
+    },
+    {
+        "controlName": "dobDateTime",
+        "label": "DOB Date & Time",
+        "type": "dateTime",
+        "controlStyle": "w-100",
+        "layoutStyle": "col-md-6 col-xs-12",
+        "validation": {
+            "required": true
+        },
+        "property": {
+            "format": "dd-mm-yy",
+            "timeFormat": "12",
+            "type": "string"
+        }
+    },
+    {
+        "controlName": "canVote",
+        "label": "Can Vote?",
+        "type": "checkbox",
+        "controlStyle": "w-100",
+        "layoutStyle": "col-md-6 col-xs-12",
+        "validation": {
+            "required": true
+        },
+        "property": {
+            "containerStyle": "mt-4"
+        }
+    },
+    {
+        "controlName": "schedulerOption",
+        "label": "Scheduler Option",
+        "type": "radio",
+        "controlStyle": "w-100",
+        "layoutStyle": "col-md-6 col-xs-12",
+        "validation": {
+            "required": true
+        },
+        "property": {
+            "options": [
+                {
+                    "label": "Daily",
+                    "value": "D"
+                },
+                {
+                    "label": "Weekly",
+                    "value": "W"
+                },
+                {
+                    "label": "Monthly",
+                    "value": "M"
+                }
+            ],
+            "containerStyle": "mt-2"
         }
     },
     {
         "controlName": "age",
         "label": "Age",
-        "type": "text",
-        "controlStyleClass": "form-control",
-        "layoutStyleClass": "col-md-6 col-xs-12",
-        "value": "10:00 AM",
+        "type": "number",
+        "controlStyle": "w-100",
+        "layoutStyle": "col-md-6 col-xs-12",
         "validation": {
-            "min": 18,
-            "max": 30
+            "min":1,
+            "max": 120
         },
         "property": {
-            "type": "number"
+            "mode": "decimal",
+            "grouping": false,
+            "fraction": 0,
+            "min":0,
+            "max":120
+        }
+    },
+    {
+        "controlName": "Amount",
+        "label": "Amount",
+        "type": "number",
+        "controlStyle": "w-100",
+        "layoutStyle": "col-md-6 col-xs-12",
+        "validation": {
+            "max": 999999999
+        },
+        "property": {
+            "mode": "currency",
+            "currency": "USD"
         }
     },
     {
         "controlName": "customControlId",
         "label": "Custom Control",
-        "layoutStyleClass": "col-md-6 col-xs-12",
+        "layoutStyle": "col-md-6 col-xs-12",
         "type": "custom",
         "validation": {
             "required": true
@@ -143,12 +227,13 @@
     {
         "controlName": "details",
         "label": "Details",
-        "type": "editor",
-        "layoutStyleClass": "col-md-12 col-xs-12"
+        "type": "textarea",
+        "controlStyle": "w-100",
+        "layoutStyle": "col-md-12 col-xs-12"
     },
     {
         "controlName": "placeholder",
         "type": "placeholder",
-        "layoutStyleClass": "col-md-12 col-xs-12"
+        "layoutStyle": "col-md-12 col-xs-12"
     }
 ]
