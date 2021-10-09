@@ -18,12 +18,14 @@ import { NgxPrimengFormComponent } from './components/form/ngx-primeng-form.comp
 import { FormControlLayoutComponent } from './components/form-control-layout/form-control-layout.component';
 import { InlineFormValidationComponent } from './components/inline-form-validation/inline-form-validation.component';
 import { NgxFormTemplate } from './directives/form-template';
+import { FormHelpTextComponent } from './components/form-help-text/form-help-text.component';
 
 const components = [
   NgxPrimengFormComponent,
   FormControlLayoutComponent,
   InlineFormValidationComponent,
-  NgxFormTemplate
+  NgxFormTemplate,
+  FormHelpTextComponent
 ];
 
 @NgModule({

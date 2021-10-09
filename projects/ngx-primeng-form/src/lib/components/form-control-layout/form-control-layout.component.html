@@ -1,18 +1,25 @@
-<div class="form-group">
-    <!--Label-->
-    <label class="ngx-form-w-full">{{label}}
-        <!--For Required field validator-->
-        <span class="text-danger label-required" *ngIf="isRequired">*</span>
-        <!--For help text-->
-        <span *ngIf="helpText" class="ngx-form-help-text" pTooltip="{{helpText}}"><i
-                class="pi pi-info-circle"></i></span>
-        <!--For Right option-->
-        <span class="ngx-form-right-content">
+<div class="form-group ngx-form-control-layout">
+
+    <div class="d-flex align-items-center justify-content-between ngx-form-control-label-content">
+        <div>
+            <label class="ngx-form-control-label">{{label}}
+                <!--For Required field validator-->
+                <span class="text-danger label-required ml-1" *ngIf="isRequired">*</span>
+                <!--Help text-->
+                <span class="ml-1 ngx-form-control-help-txt">
+                    <ngx-form-help-text [text]="helpText"></ngx-form-help-text>
+                </span>
+            </label>
+        </div>
+        <div>
             <ng-content select="[rightContent]"></ng-content>
-        </span>
-    </label>
-    <!--Content-->
-    <ng-content></ng-content>
+        </div>
+    </div>
+
+    <div class="ngx-form-control-content">
+        <!--Content-->
+        <ng-content></ng-content>
+    </div>
     <!--Validation-->
     <ngx-inline-form-validation [form]="form" [control]="control" [displayName]="label"></ngx-inline-form-validation>
     <!--Footer Content-->

@@ -2,14 +2,14 @@
     {
         "controlName": "firstName",
         "id": "firstName",
-        "label": "First Name",
+        "label": "First",
         "type": "text",
         "controlStyle": "w-100",
         "layoutStyle": "col-md-6 col-xs-12",
         "placeholder": "",
         "value": "",
         "validation": {
-            "required": true,
+            "required": false,
             "email": true,
             "minLength": 0,
             "maxLength": 255,

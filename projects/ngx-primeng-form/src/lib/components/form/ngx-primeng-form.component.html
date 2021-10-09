@@ -182,7 +182,7 @@
                                 <!--Editor-->
                                 <ng-container *ngSwitchCase="'editor'">
                                     <p-editor [formControlName]="obj.controlName" [style]="obj.property.style"
-                                        [styleClass]="obj.controlStyleClass" [placeholder]="obj.placeholder"
+                                        [styleClass]="obj.controlStyle" [placeholder]="obj.placeholder"
                                         [readonly]="obj.property.readonly" [modules]="obj.property.modules"
                                         (onTextChange)="obj.property.onChange($event)"
                                         (onInit)="obj.property.onInit($event)">

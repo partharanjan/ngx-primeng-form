@@ -1,6 +1,6 @@
 {
   "name": "ngx-primeng-form",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/partharanjan/ngx-primeng-form.git"
@@ -21,7 +21,9 @@
     "@angular/forms": "~11.2.13",
     "@angular/cdk": "^11.2.12",
     "primeicons": "^4.1.0",
-    "primeng": "^11.4.0",
+    "primeng": "^11.4.0"
+  },
+  "dependencies": {
     "tslib": "^2.2.0"
   }
 }
