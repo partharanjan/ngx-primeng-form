@@ -152,7 +152,17 @@
                                         (completeMethod)="obj.property.onSearch($event)"
                                         (onSelect)="obj.property.onChange($event)"
                                         (onBlur)="obj.property.onBlur($event)" (onFocus)="obj.property.onFocus($event)"
-                                        [appendTo]="obj.property.appendTo">
+                                        [appendTo]="obj.property.appendTo" [field]="obj.property.field"
+                                        [multiple]="obj.property.multiple" [dropdown]="obj.property.dropdown"
+                                        [dataKey]="obj.property.dataKey" [placeholder]="obj.placeholder">
+                                        <!--Custom Template-->
+                                        <ng-container *ngIf="obj.property.customTemplate">
+                                            <ng-template let-lineItem pTemplate="item">
+                                                <ng-container
+                                                    *ngTemplateOutlet="autoCompleteCustomTemplate;context:{item:lineItem,control:obj}">
+                                                </ng-container>
+                                            </ng-template>
+                                        </ng-container>
                                     </p-autoComplete>
                                 </ng-container>
 

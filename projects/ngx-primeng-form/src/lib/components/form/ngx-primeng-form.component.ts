@@ -40,6 +40,8 @@ export class NgxPrimengFormComponent implements OnInit, AfterContentInit {
   topContentTemplate: TemplateRef<any>;
   // bottom content template
   bottomContentTemplate: TemplateRef<any>;
+  // autocomplete custom template
+  autoCompleteCustomTemplate: TemplateRef<any>;
 
   constructor(private service: NgxPrimengFormService) { }
 
@@ -60,6 +62,9 @@ export class NgxPrimengFormComponent implements OnInit, AfterContentInit {
           } break;
           case 'bottomContent': {
             this.bottomContentTemplate = item.template;
+          } break;
+          case 'autoComplete': {
+            this.autoCompleteCustomTemplate = item.template;
           } break;
         }
       });

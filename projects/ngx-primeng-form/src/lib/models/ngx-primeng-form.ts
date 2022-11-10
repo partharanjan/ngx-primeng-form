@@ -114,8 +114,17 @@ export class NgxPrimengFormDateProperty extends NgxPrimengFormProperty {
 // autocomplete property
 export class NgxPrimengFormAutoCompleteProperty extends NgxPrimengFormProperty {
     suggestions: any[] = [];
-    minLength: number = 1;
-    forceSelection: boolean = false;
+    minLength: number = 3;
+    forceSelection: boolean = true;
+    field: string = null;
+    dataKey: string = null;
+    multiple: boolean = false;
+    dropdown: boolean = false;
+    customTemplate: boolean = false;
+
+    showEmptyMessage: boolean = true;
+    emptyMessage: string = 'No records found.';
+
     onSearch($event: any) { };
 }
 
