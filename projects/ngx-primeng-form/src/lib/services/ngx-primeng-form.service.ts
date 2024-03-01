@@ -156,9 +156,9 @@ export class NgxPrimengFormService {
     console.log(property)
     // NULL check
     if (property) {
-      
+
       // set default value
-     
+
       // shared property
       this.setSharedProperty(model, property);
       // for format
@@ -175,8 +175,9 @@ export class NgxPrimengFormService {
       this.setProperty(model, 'monthNavigator', property);
     }
 
+    const currentYear = new Date().getFullYear()
     // set default
-    model['yearRange'] = '2022:2024';
+    model['yearRange'] = `${currentYear - 60}:${currentYear}`;
     model['yearNavigator'] = true;
     model['monthNavigator'] = true;
     return model;
