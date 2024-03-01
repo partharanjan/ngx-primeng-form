@@ -63,7 +63,10 @@
                                         (onSelect)="obj.property.onChange($event)"
                                         (onInput)="obj.property.onChange($event)" (onBlur)="obj.property.onBlur($event)"
                                         (onFocus)="obj.property.onFocus($event)" [appendTo]="obj.property.appendTo"
-                                        [dataType]="obj.property.type" [view]="obj.property.view">
+                                        [dataType]="obj.property.type" [view]="obj.property.view"
+                                        [yearRange]="obj.property.yearRange"
+                                        [yearNavigator]="obj.property.yearNavigator"
+                                        [monthNavigator]="obj.property.monthNavigator">
                                     </p-calendar>
                                 </ng-container>
 

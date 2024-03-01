@@ -1,5 +1,19 @@
 [
     {
+        "controlName": "dob",
+        "id": "firstName",
+        "label": "First Name",
+        "type": "date",
+        "controlStyleClass": "form-control",
+        "layoutStyleClass": "col-md-6 col-xs-12",
+        "placeholder": "Enter First Name",
+        "value": "",
+        "validation": {
+            "required": true,
+            "maxLength": 100
+        }
+    },
+    {
         "controlName": "fieldName",
         "id": "fieldName",
         "label": "Field Name",

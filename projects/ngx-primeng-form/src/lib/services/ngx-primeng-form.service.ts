@@ -153,8 +153,12 @@ export class NgxPrimengFormService {
   private getCalenderProperty(property: any): NgxPrimengFormDateProperty {
     // create model
     const model = new NgxPrimengFormDateProperty();
+    console.log(property)
     // NULL check
     if (property) {
+      
+      // set default value
+     
       // shared property
       this.setSharedProperty(model, property);
       // for format
@@ -163,7 +167,18 @@ export class NgxPrimengFormService {
       this.setProperty(model, 'type', property);
       // for view
       this.setProperty(model, 'view', property);
+      // set year range
+      this.setProperty(model, 'yearRange', property);
+      // get year navigator
+      this.setProperty(model, 'yearNavigator', property);
+      // set month navigator
+      this.setProperty(model, 'monthNavigator', property);
     }
+
+    // set default
+    model['yearRange'] = '2022:2024';
+    model['yearNavigator'] = true;
+    model['monthNavigator'] = true;
     return model;
   }
 
