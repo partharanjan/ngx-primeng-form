@@ -26,7 +26,7 @@ export class NgxPrimengFormService {
   constructor() { }
 
   // this will create internally control
-  private create(controlName: string, label: string, id: string, type: NgxPrimengFormType, value: any, placeholder: string, controlCssClass: string, layoutCssClass: string, validation: INgxPrimengFormValidation, defProperty: any): INgxPrimengForm {
+  private create(controlName: string, label: string, id: string, type: NgxPrimengFormType, value: any, placeholder: string, controlCssClass: string, layoutCssClass: string, validation: INgxPrimengFormValidation, defProperty: any, hide: boolean): INgxPrimengForm {
     return {
       controlName,
       label,
@@ -37,7 +37,8 @@ export class NgxPrimengFormService {
       type,
       placeholder,
       property: this.getPropertyType(type, defProperty),
-      validation
+      validation,
+      hide
     }
   }
 
@@ -298,7 +299,9 @@ export class NgxPrimengFormService {
           this.hasPropertyValue(form, 'controlStyleClass') ? form.controlStyleClass : '',
           this.hasPropertyValue(form, 'layoutStyleClass') ? form.layoutStyleClass : '',
           this.hasPropertyValue(form, 'validation') ? form.validation : null,
-          this.hasPropertyValue(form, 'property') ? form.property : null);
+          this.hasPropertyValue(form, 'property') ? form.property : null,
+          form?.hide ?? false
+        );
         results.push(formObj);
       });
     }
@@ -453,6 +456,18 @@ export class NgxPrimengFormService {
     if (control.disabled) { newControl.disable({ emitEvent: false }); }
 
     return newControl;
+  }
+
+  showHide(forms: INgxPrimengForm[], controlName: string, hide: boolean, callback: () => void) {
+    if (forms && forms.length > 0) {
+      const item = forms.find(m => m.controlName.toLowerCase() == controlName.toLowerCase());
+      if (item != null) {
+        // callback
+        callback();
+        // hide
+        item['hide'] = hide;
+      }
+    }
   }
 
 }

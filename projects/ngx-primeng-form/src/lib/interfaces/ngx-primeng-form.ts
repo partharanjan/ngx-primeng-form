@@ -37,6 +37,8 @@ export interface INgxPrimengForm {
     validation: INgxPrimengFormValidation;
     // property
     property?: NgxPrimengFormProperty;
+    // hide control
+    hide?:boolean
 }
 
 export interface INgxPrimengFormValidation {
